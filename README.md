@@ -12,6 +12,9 @@
     - [Bubble Sort:](#bubble-sort)
       - [How bubble sort works:](#how-bubble-sort-works)
       - [Time \& Space Complexity (Bubble Sort)](#time--space-complexity-bubble-sort)
+    - [Selection Sort:](#selection-sort)
+      - [How selection sort works:](#how-selection-sort-works)
+      - [Time \& Space Complexity (Bubble Sort)](#time--space-complexity-bubble-sort-1)
 
 
 # Part 1: Data Structure
@@ -59,26 +62,26 @@ Pass 1: i = 0; i < 3:
 
 1st largest number 5 will move to the end
 
-| j   | condition | Compare | Swap? | Array State  |
-| --- | --------- | ------- | ----- | ------------ |
-| 0   | 0 < 3     | 5 > 1   | true  | [1, 5, 4, 2] |
-| 1   | 1 < 3     | 5 > 4   | true  | [1, 4, 5, 2] |
-| 2   | 2 < 3     | 5 > 2   | true  | [1, 4, 2, 5] |
+| j   | condition    | Compare      | Array State(after swap) |
+| --- | ------------ | ------------ | ----------------------- |
+| 0   | 0 < 3 = true | 5 > 1 = true | [1, 5, 4, 2]            |
+| 1   | 1 < 3 = true | 5 > 4 = true | [1, 4, 5, 2]            |
+| 2   | 2 < 3 = true | 5 > 2 = true | [1, 4, 2, 5]            |
 
-Pass 2 i = 1; i < 3:
+Pass 2: i = 1; i < 3:
 
 2nd largest number 4 moved to its position before 5:
 
-| j   | condition | Compare | Swap? | Array State                           |
-| --- | --------- | ------- | ----- | ------------------------------------- |
-| 0   | 0 < 2     | 1 > 4   | false |                                       |
-| 1   | 1 < 2     | 4 > 2   | true  | [1, 2, 4, 5] (Sorted ascending order) |
+| j   | condition    | Compare       | Array State(after swap)               |
+| --- | ------------ | ------------- | ------------------------------------- |
+| 0   | 0 < 2 = true | 1 > 4 = false |                                       |
+| 1   | 1 < 2 = true | 4 > 2 = true  | [1, 2, 4, 5] (Sorted ascending order) |
 
-Pass 3 i = 2; i < 3:
+Pass 3: i = 2; i < 3:
 
-| j   | condition | Compare | Swap? | Array State |
-| --- | --------- | ------- | ----- | ----------- |
-| 0   | 0 < 1     | 1 > 2   | false |             |
+| j   | condition    | Compare       | Array State |
+| --- | ------------ | ------------- | ----------- |
+| 0   | 0 < 1 = true | 1 > 2 = false |             |
 
 
 
@@ -90,3 +93,75 @@ Pass 3 i = 2; i < 3:
 | Average | O(n²)                      |
 | Worst   | O(n²)                      |
 | Space   | O(1)                       |
+
+### Selection Sort:
+Selection sort finds the smallest element and places it at the correct position.
+
+```js 
+let arr = [5, 1, 4, 2]
+
+for (let i = 0; i < arr.length - 1; i++) {
+    let minIndex = i;
+
+    for (let j = i + 1; j < arr.length; j++) {
+        if (arr[j] < arr[minIndex]) {
+            minIndex = j;
+        }
+    }
+
+    // swap
+    let temp = arr[i];
+    arr[i] = arr[minIndex];
+    arr[minIndex] = temp;
+}
+
+console.log(arr); // [1, 2, 4, 5]
+```
+
+#### How selection sort works: 
+
+`let arr = [5, 1, 4, 2]`
+
+Pass 1: i = 0; 0 < 3; minIndex = 0:
+
+1st smallest number 1 will move to the first index
+
+| j   | condition    | Compare       | minIndex |
+| --- | ------------ | ------------- | -------- |
+| 1   | 1 < 4 = true | 1 < 5 = true  | 1        |
+| 2   | 2 < 4 = true | 4 < 1 = false |          |
+| 3   | 3 < 4 = true | 2 < 1 = false |          |
+
+Swap: 
+[5, 1, 4, 2] --> 5 swap 1 --> [1, 5, 4, 2]
+
+Pass 2: i = 1; 1 < 3; minIndex = 1:
+
+2nd smallest number 2 will move to second index
+
+| j   | condition    | Compare      | minIndex |
+| --- | ------------ | ------------ | -------- |
+| 2   | 2 < 4 = true | 4 < 5 = true | 2        |
+| 3   | 3 < 4 = true | 2 < 4 = true | 3        |
+
+Swap: 
+[1, 5, 4, 2] --> 5 swap 2 --> [1, 2, 4, 5] (Sorted ascending order)
+
+pass 3: i = 2; 2 < 3; minIndex = 2: 
+
+
+| j   | condition    | Compare       | minIndex |
+| --- | ------------ | ------------- | -------- |
+| 3   | 3 < 4 = true | 5 < 4 = false |          |
+
+Swap: 
+[1, 2, 4, 5] --> 4 swap 4 -->[1, 2, 4, 5] 
+
+#### Time & Space Complexity (Bubble Sort)
+
+| Case    | Time  |
+| ------- | ----- |
+| Best    | O(n²) |
+| Average | O(n²) |
+| Worst   | O(n²) |
+| Space   | O(1)  |
