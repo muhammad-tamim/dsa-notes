@@ -18,6 +18,9 @@
     - [Insertion Sort:](#insertion-sort)
       - [How insertion sort works:](#how-insertion-sort-works)
       - [Time \& Space Complexity:](#time--space-complexity)
+    - [Quick Sort:](#quick-sort)
+      - [How insertion sort works:](#how-insertion-sort-works-1)
+      - [Time \& Space Complexity](#time--space-complexity-1)
 
 
 # Part 1: Data Structure
@@ -251,3 +254,42 @@ arr[j + 1] = key --> arr[1] = 2 --> `[1, 2, 4, 5]`
 | Best (already sorted)  | O(n)  | O(1)  |
 | Average                | O(n²) | O(1)  |
 | Worst (reverse sorted) | O(n²) | O(1)  |
+
+
+### Quick Sort:
+Pick a pivot element and place it in its correct position. All smaller elements go left, larger elements go right. Repeat this process recursively.
+
+```js
+function quickSort(arr) {
+    if (arr.length <= 1) {
+        return arr;
+    }
+
+    let pivot = arr[arr.length - 1];
+    let left = [];
+    let right = [];
+
+    for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] < pivot) {
+            left.push(arr[i]);
+        } else {
+            right.push(arr[i]);
+        }
+    }
+
+    return [...quickSort(left), pivot, ...quickSort(right)];
+}
+
+console.log(quickSort([5, 3, 8, 4, 2]));
+```
+
+#### How insertion sort works:
+#### Time & Space Complexity
+| Case    | Time       |
+| ------- | ---------- |
+| Best    | O(n log n) |
+| Average | O(n log n) |
+| Worst   | O(n²)      |
+| Space   | O(log n)   |
+
+Worst case happens when array is already sorted and bad pivot is chosen.
