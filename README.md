@@ -15,6 +15,9 @@
     - [Selection Sort:](#selection-sort)
       - [How selection sort works:](#how-selection-sort-works)
       - [Time \& Space Complexity (Bubble Sort)](#time--space-complexity-bubble-sort-1)
+    - [Insertion Sort:](#insertion-sort)
+      - [How insertion sort works:](#how-insertion-sort-works)
+      - [Time \& Space Complexity:](#time--space-complexity)
 
 
 # Part 1: Data Structure
@@ -165,3 +168,86 @@ Swap:
 | Average | O(n²) |
 | Worst   | O(n²) |
 | Space   | O(1)  |
+
+### Insertion Sort:
+Build a sorted part of the array one element at a time. Take the next element and insert it in its correct position in the already sorted part.
+
+```js
+let arr = [5, 1, 4, 2]
+
+for (let i = 1; i < arr.length; i++) {
+    let key = arr[i];
+    let j = i - 1;
+ 
+    // Shift elements greater than key to the right
+    while (j >= 0 && arr[j] > key) {
+        arr[j + 1] = arr[j];
+        j--;
+    }
+
+    // Insert key in correct position
+    arr[j + 1] = key;
+}
+
+console.log(arr) // 1, 2, 4, 5
+```
+ 
+#### How insertion sort works: 
+
+`let arr = [5, 1, 4, 2]`
+
+**Pass 1:** i = 1; i < 4: 
+
+```js
+key = arr[i] = arr[1] = 1
+j = i - 1 = 0
+```
+
+| j   | j >= 0 && arr[j] > key  | ar[j + 1] = arr[j] | Array State  | j-- |
+| --- | ----------------------- | ------------------ | ------------ | --- |
+| 0   | 0 >= 0 && 5 > 1 == true | arr[1] = arr[0]    | [5, 5, 4, 2] | -1  |
+
+```js
+arr[j + 1] = key --> arr[0] = 1 -->  `[1, 5, 4, 2]`
+```
+
+**Pass 2:** i++ --> i = 2; i < 4: 
+
+```js
+key = arr[i] = arr[2] = 4
+j = i - 1 = 1
+```
+
+| j   | j >= 0 && arr[j] > key  | ar[j + 1] = arr[j] | Array State  | j-- |
+| --- | ----------------------- | ------------------ | ------------ | --- |
+| 1   | 1 >= 0 && 5 > 4 → true  | arr[2] = arr[1]    | [1, 5, 5, 2] | 0   |
+| 0   | 0 >= 0 && 1 > 4 → false |                    |              |     |
+
+```js
+arr[j + 1] = key --> arr[1] = 4 --> `[1, 4, 5, 2]`
+```
+
+**Pass 3:** i++ --> i = 3; i < 4: 
+
+```js
+key = arr[i] = arr[3] = 2
+j = i - 1 = 2
+```
+
+| j   | j >= 0 && arr[j] > key  | ar[j + 1] = arr[j] | Array State  | j-- |
+| --- | ----------------------- | ------------------ | ------------ | --- |
+| 2   | 2 >= 0 && 5 > 2 → true  | arr[3] = arr[2]    | [1, 4, 5, 5] | 1   |
+| 1   | 1 >= 0 && 4 > 2 → true  | arr[2] = arr[1]    | [1, 4, 4, 5] | 0   |
+| 0   | 0 >= 0 && 1 > 2 → false |                    |              |     |
+
+```js
+arr[j + 1] = key --> arr[1] = 2 --> `[1, 2, 4, 5]`
+```
+
+#### Time & Space Complexity:
+
+| Case                   | Time  | Space |
+| ---------------------- | ----- | ----- |
+| Best (already sorted)  | O(n)  | O(1)  |
+| Average                | O(n²) | O(1)  |
+| Worst (reverse sorted) | O(n²) | O(1)  |
