@@ -5,6 +5,7 @@
     - [Rules of Big-O Notation:](#rules-of-big-o-notation)
   - [Time Complexity](#time-complexity)
     - [Time Complexity Growth Comparison:](#time-complexity-growth-comparison)
+    - [Constraints of Coding Problem Set:](#constraints-of-coding-problem-set)
   - [Space Complexity](#space-complexity)
 - [Part 1: Data Structure](#part-1-data-structure)
   - [Stack](#stack)
@@ -106,6 +107,37 @@ Time Complexity: O(n × n) = O(n²)
 ```
 
 ```js
+for(let i = 1; i <= n; i = i * 2){
+    .....
+}
+
+Time Complexity: O(log n), because: i = 1, 2, 4, 8, 16, 32, 64.......each time input device by half
+
+// same things here
+  while (n > 1) {
+    console.log(n);
+    n = Math.floor(n / 2);
+  }
+
+Time Complexity: O(log n), because: suppose n = 64, then = 64 32, 16, 8, 4, 2, 1.......each time input device by half
+
+// same things for digit extraction
+
+let n = 11245;
+
+while (n > 0) {
+    let digit = n % 10;
+    console.log(digit)
+
+    n = Math.floor(n / 10)
+}
+
+Time Complexity: O(log n), because: n = 11245 → 1124 → 112 → 11 → 1 → 0.......each time input device by 10, 
+so digits = ⌊log₁₀(n)⌋ + 1
+          = O(log₁₀ n)  →  O(log n)                                                                                                            
+```
+
+```js
 function factorial(n) {
     if (n === 0) {
         return 1;
@@ -141,6 +173,23 @@ so, Time Complexity for recursion: (number of calls) × (work per call) = O(n) *
 | **O(n²)**      | 😐      | 😵       | 💀         | ☠️           | ☠️              | ☠️                 |
 | **O(2ⁿ)**      | 💀      | 💀       | ☠️         | ☠️           | ☠️              | ☠️                 |
 | **O(n!)**      | ☠️      | ☠️       | ☠️         | ☠️           | ☠️              | ☠️                 |
+
+### Constraints of Coding Problem Set: 
+For most of the platform like Codeforces, CodeChef, LeetCode we can perform 1s ≈ 10⁸ operation for the worse case
+
+Note: ≈ means approximately
+
+Common constrains for assuming complexity for problems: 
+
+| n         | Allowed Complexity | Notes / Examples              |
+| --------- | ------------------ | ----------------------------- |
+| n ≥ 10⁸   | O(1), O(log n)     | Binary search, simple formula |
+| n ≤ 10⁶   | O(n), O(n log n)   | Array traversal, sorting      |
+| n ≤ 10⁴   | O(n²)              | Nested loops, DP on 2D grid   |
+| n ≤ 500   | O(n³)              | Triple nested loops, cubic DP |
+| n ≤ 20–25 | O(2ⁿ)              | Brute force, Recursion        |
+| n ≤ 12    | O(n!)              | Permutations, TSP brute force |
+
 
 ## Space Complexity
 Space complexity measures how the memory of an algorithm grows as the input size (n) grows.
