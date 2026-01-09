@@ -5,6 +5,7 @@
     - [Rules of Big-O Notation:](#rules-of-big-o-notation)
   - [Time Complexity](#time-complexity)
     - [Time Complexity Growth Comparison:](#time-complexity-growth-comparison)
+  - [Space Complexity](#space-complexity)
 - [Part 1: Data Structure](#part-1-data-structure)
   - [Stack](#stack)
   - [Queue](#queue)
@@ -36,16 +37,16 @@ Big-O notation is a mathematical way to describe the worst-case time or space co
 
 Common Notations Complexities(Best --> Worse):
 
-| Big-O      | Name              | Meaning                                                             | Simple Example                                  |
-| ---------- | ----------------- | ------------------------------------------------------------------- | ----------------------------------------------- |
-| O(1)       | Constant Time     | No loop, no recursion, fixed number of operations.                  | Array element access through  index             |
-| O(log n)   | Logarithmic Time  | Each step cuts the input size in half.                              | divide by 2, Binary search / tree traversal     |
-| O(n)       | Linear Time       | One loop that goes through the input once.                          | Traversing arrays                               |
-| O(n log n) | Linearithmic Time | Divide the problem, then loop through all elements (divide + loop). | Merge sort, Quick sort, Heap sort, builtin sort |
-| O(n²)      | Quadratic Time    | A loop inside another loop over the same input.                     | Bubble & Selection sort, or any double loop     |
-| O(n3)      | Cubic Time        | Three nested loops over the same input.                             |                                                 |
-| O(2ⁿ)      | Exponential Time  | Recursive function where each call makes 2 or more calls.           | find Fibonacci using recursion                  |
-| O(n!)      | Factorial Time    | All possible permutations or trying every possible ordering.        |                                                 |
+| Big-O      | Name              | Meaning                                                                                  | Simple Example                                              |
+| ---------- | ----------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| O(1)       | Constant Time     | Number of operations/steps does not grow with input size                                 | Accessing arr[5], sum of 1 to N using formula               |
+| O(log n)   | Logarithmic Time  | Each step cuts the input size in half.                                                   | Binary search                                               |
+| O(n)       | Linear Time       | One loop for traversing input or recursion where each call reduces the problem size by 1 | Traversing array, find factorial by recursion               |
+| O(n log n) | Linearithmic Time | Divide the problem, then loop through all elements (divide + loop).                      | Merge sort, Quick sort(avg), Heap sort, Grady built in sort |
+| O(n²)      | Quadratic Time    | Double nested loops over the same input.                                                 | Bubble & Selection sort                                     |
+| O(n3)      | Cubic Time        | Three nested loops over the same input.                                                  |                                                             |
+| O(2ⁿ)      | Exponential Time  | Recursive function where each call makes 2 more calls.                                   |                                                             |
+| O(n!)      | Factorial Time    | Trying every possible ordering (permutations)                                            |                                                             |
 
 ![image](./images/big-o-notation-graph.jpg)
 
@@ -58,7 +59,7 @@ O(100)  → O(1)
 O(5n²)  → O(n²)
 ```
 
-- Keep the largest term: 
+- Keep the largest notations: 
 
 ```
 O(n² + n + 1) → O(n²)
@@ -67,34 +68,33 @@ O(n² + 10n + 500) → O(n²)
 O(n + n + 500) → O(n)
 ```
 
-- Always calculate for worse case:
+- Always calculate for worse case for time and space complexity:
 
 ```js
-const arr = [10, 5, 3, 6, 4]
-
-for(let i = 0; i < arr.length; i++){
-    if(arr[i] === 10){
-        console.log(arr[i])
-        break
-    }
+function linearSearch(arr, target) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) return i;
+  }
+  return -1;
 }
 ```
-here, 
-  - Best case: O(1), means 10 can found first index
-  - Average case: O(n), Element can be anywhere
-  - Worse Case: O(n), Element is last or not found
 
-- Sequential Adding: 
+|                  | Best Case                                 | Average Case                       | Worst Case                       |
+| ---------------- | ----------------------------------------- | ---------------------------------- | -------------------------------- |
+| Time Complexity  | target found first position: Steps = O(1) | target found random position: O(N) | target found last position: O(N) |
+| Space Complexity | O(1)                                      | O(1)                               | O(1)                             |
+
+
+## Time Complexity
+Time complexity measures how the run time of an algorithm grows as the input size (n) grows.
 
 ```js
 for (...) {}   // O(n)
 for (...) {}   // O(n)
 
-O(n) + O(n) = O(2n) 
-            = O(n)
+Time Complexity: O(n) + O(n) = O(2n) 
+                            = O(n)
 ```
-
-- Nested Statements Multiply: 
 
 ```js
 for (...) {        // O(n)
@@ -102,63 +102,32 @@ for (...) {        // O(n)
   }
 }
 
-O(n × n) = O(n²)
+Time Complexity: O(n × n) = O(n²)
 ```
-
-## Time Complexity
-Time complexity measures how the run time of an algorithm grows as the input size (n) grows.
-
-Steps to Calculate Time Complexity: 
-- Identify basic operations
-- Look at loops
-- Look at loops
-- Ignore constants and less dominant terms
-- Consider worst-case by default
-
-example 1: 
-```js
-function printArray(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    console.log(arr[i]);
-  }
-}
-```
-Single loop over n elements, so Time Complexity: O(n)
-
-example 2: 
-
-```js
-function printPairs(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr.length; j++) {
-      console.log(arr[i], arr[j]);
-    }
-  }
-}
-```
-
-```
-Outer loop: n, 
-Inner loop: n, 
-Multiply → n × n
-
-so Time Complexity: O(n²)
-```
-
-example 3: 
 
 ```js
 function factorial(n) {
-  if (n <= 1) return 1;
-  return n * factorial(n - 1);
+    if (n === 0) {
+        return 1;
+    }
+
+    return n * factorial(n - 1)
 }
-```
 
-```
-Recursive call decreases n by 1 each time
 
-Number of calls = n
-Time Complexity: O(n)
+
+- number of calls: n + 1 (since total 6 calls needed for factorial 5) --> O(n)
+for factorial(5):
+
+= 5 * factorial(4)
+= 5 * (4 * factorial(3))
+= 5 * (4 * (3 * factorial(2)))
+= 5 * (4 * (3 * (2 * factorial(1))))
+= 5 * (4 * (3 * (2 * (1 * factorial(0)))))
+
+- work per cell: n * factorial(n - 1) = 1 = O(1) (since we do just multiplication)
+
+so, Time Complexity for recursion: (number of calls) × (work per call) = O(n) * O(1) = O(n)
 ```
 
 ### Time Complexity Growth Comparison:
@@ -173,7 +142,27 @@ Time Complexity: O(n)
 | **O(2ⁿ)**      | 💀      | 💀       | ☠️         | ☠️           | ☠️              | ☠️                 |
 | **O(n!)**      | ☠️      | ☠️       | ☠️         | ☠️           | ☠️              | ☠️                 |
 
+## Space Complexity
+Space complexity measures how the memory of an algorithm grows as the input size (n) grows.
 
+
+```js
+let sum = 0 // O(1) 
+for (...) {        
+    sum += i;
+}
+
+Space Complexity: O(1)
+```
+
+```js
+let result = [] // O(n) 
+for (...) {        
+    result.push(arr[i])
+}
+
+Space Complexity: O(n)
+```
 
 # Part 1: Data Structure
 ## Stack 
