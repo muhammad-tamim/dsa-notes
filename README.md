@@ -1,5 +1,8 @@
 <h1 align="center">Data Structure and Algorithms Notes</h1>
 
+- [Introduction:](#introduction)
+  - [Big-O Notation](#big-o-notation)
+    - [Rules of Big-O Notation:](#rules-of-big-o-notation)
 - [Part 1: Data Structure](#part-1-data-structure)
   - [Stack](#stack)
   - [Queue](#queue)
@@ -23,6 +26,82 @@
       - [Time \& Space Complexity](#time--space-complexity-1)
     - [Marge Sort:](#marge-sort)
       - [Time \& Space Complexity:](#time--space-complexity-2)
+
+
+# Introduction: 
+## Big-O Notation
+Big-O notation is a mathematical way to describe the worst-case time or space complexity of an algorithm as the input size grows.
+
+Common Notations Complexities(Best --> Worse):
+
+| Big-O      | Name              | Meaning                                                             | Simple Example                                  |
+| ---------- | ----------------- | ------------------------------------------------------------------- | ----------------------------------------------- |
+| O(1)       | Constant Time     | No loop, no recursion, fixed number of operations.                  | Array element access through  index             |
+| O(log n)   | Logarithmic Time  | Each step cuts the input size in half.                              | divide by 2, Binary search / tree traversal     |
+| O(n)       | Linear Time       | One loop that goes through the input once.                          | Traversing arrays                               |
+| O(n log n) | Linearithmic Time | Divide the problem, then loop through all elements (divide + loop). | Merge sort, Quick sort, Heap sort, builtin sort |
+| O(n²)      | Quadratic Time    | A loop inside another loop over the same input.                     | Bubble & Selection sort, or any double loop     |
+| O(n3)      | Cubic Time        | Three nested loops over the same input.                             |                                                 |
+| O(2ⁿ)      | Exponential Time  | Recursive function where each call makes 2 or more calls.           | find Fibonacci using recursion                  |
+| O(n!)      | Factorial Time    | All possible permutations or trying every possible ordering.        |                                                 |
+
+![image](./images/big-o-notation-graph.jpg)
+
+### Rules of Big-O Notation:
+- Ignore Constants:
+
+```
+O(2n)   → O(n)
+O(100)  → O(1)
+O(5n²)  → O(n²)
+```
+
+- Keep the largest term: 
+
+```
+O(n² + n + 1) → O(n²)
+O(n log n + n) → O(n log n)
+O(n² + 10n + 500) → O(n²)
+O(n + n + 500) → O(n)
+```
+
+- Always calculate for worse case:
+
+```js
+const arr = [10, 5, 3, 6, 4]
+
+for(let i = 0; i < arr.length; i++){
+    if(arr[i] === 10){
+        console.log(arr[i])
+        break
+    }
+}
+```
+here, 
+  - Best case: O(1), means 10 can found first index
+  - Average case: O(n), Element can be anywhere
+  - Worse Case: O(n), Element is last or not found
+
+- Sequential Adding: 
+
+```js
+for (...) {}   // O(n)
+for (...) {}   // O(n)
+
+O(n) + O(n) = O(2n) 
+            = O(n)
+```
+
+- Nested Statements Multiply: 
+
+```js
+for (...) {        // O(n)
+  for (...) {      // O(n)
+  }
+}
+
+O(n × n) = O(n²)
+```
 
 
 # Part 1: Data Structure
