@@ -3,6 +3,8 @@
 - [Introduction:](#introduction)
   - [Big-O Notation](#big-o-notation)
     - [Rules of Big-O Notation:](#rules-of-big-o-notation)
+  - [Time Complexity](#time-complexity)
+    - [Time Complexity Growth Comparison:](#time-complexity-growth-comparison)
 - [Part 1: Data Structure](#part-1-data-structure)
   - [Stack](#stack)
   - [Queue](#queue)
@@ -102,6 +104,75 @@ for (...) {        // O(n)
 
 O(n × n) = O(n²)
 ```
+
+## Time Complexity
+Time complexity measures how the run time of an algorithm grows as the input size (n) grows.
+
+Steps to Calculate Time Complexity: 
+- Identify basic operations
+- Look at loops
+- Look at loops
+- Ignore constants and less dominant terms
+- Consider worst-case by default
+
+example 1: 
+```js
+function printArray(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+  }
+}
+```
+Single loop over n elements, so Time Complexity: O(n)
+
+example 2: 
+
+```js
+function printPairs(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      console.log(arr[i], arr[j]);
+    }
+  }
+}
+```
+
+```
+Outer loop: n, 
+Inner loop: n, 
+Multiply → n × n
+
+so Time Complexity: O(n²)
+```
+
+example 3: 
+
+```js
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+```
+
+```
+Recursive call decreases n by 1 each time
+
+Number of calls = n
+Time Complexity: O(n)
+```
+
+### Time Complexity Growth Comparison:
+
+| Big-O          | n = 10 | n = 100 | n = 1,000 | n = 100,000 | n = 10,000,000 | n = 1,000,000,000 |
+| -------------- | ------ | ------- | --------- | ----------- | -------------- | ----------------- |
+| **O(1)**       | 😄      | 😄       | 😄         | 😄           | 😄              | 😄                 |
+| **O(log n)**   | 😄      | 😄       | 😄         | 😄           | 😄              | 😄                 |
+| **O(n)**       | 😄      | 😄       | 🙂         | 🙂           | 😐              | 😵                 |
+| **O(n log n)** | 🙂      | 🙂       | 😐         | 😵           | 💀              | ☠️                 |
+| **O(n²)**      | 😐      | 😵       | 💀         | ☠️           | ☠️              | ☠️                 |
+| **O(2ⁿ)**      | 💀      | 💀       | ☠️         | ☠️           | ☠️              | ☠️                 |
+| **O(n!)**      | ☠️      | ☠️       | ☠️         | ☠️           | ☠️              | ☠️                 |
+
 
 
 # Part 1: Data Structure
