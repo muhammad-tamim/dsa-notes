@@ -7,6 +7,7 @@
     - [Time Complexity Growth Comparison:](#time-complexity-growth-comparison)
     - [Constraints of Coding Problem Set:](#constraints-of-coding-problem-set)
     - [How to check code real time using js:](#how-to-check-code-real-time-using-js)
+    - [Lookup Table:](#lookup-table)
   - [Space Complexity](#space-complexity)
 - [Part 1: Data Structure](#part-1-data-structure)
   - [Array](#array)
@@ -218,6 +219,55 @@ for (let i = 1; i <= 5; i++) {
 }
 console.timeEnd("program") // program: 5.603ms
 ```
+
+### Lookup Table: 
+A lookup table is a pattern that allows us to retrieve data in O(1) time complexity using a key.
+
+```js
+const books = [
+    { id: "b-101", title: "Cracking the Coding Interview", author: "Gayle" },
+    { id: "b-102", title: "Clean Code", author: "Robert C. Martin" },
+    { id: "b-103", title: "Introduction to Algorithms", author: "Cormen" },
+    { id: "b-104", title: "Design Patterns", author: "Erich." }
+];
+
+const lookupTable = books.reduce((table, post) => {
+    table[post.id] = post
+
+    return table
+}, {})
+
+console.log(lookupTable)
+
+/*
+{
+  'b-101': { id: 'b-101', title: 'Cracking the Coding Interview', author: 'Gayle'},
+  'b-102': { id: 'b-102', title: 'Clean Code', author: 'Robert C. Martin' },
+  'b-103': { id: 'b-103', title: 'Introduction to Algorithms', author: 'Cormen'},
+  'b-104': { id: 'b-104', title: 'Design Patterns', author: 'Erich.' }
+}
+*/
+
+console.log(lookupTable["b-104"]) // { id: 'b-104', title: 'Design Patterns', author: 'Erich.' }
+```
+
+Time complexity for this code is: O(1)
+
+without lookup table: 
+
+```js
+const books = [
+    { id: "b-101", title: "Cracking the Coding Interview", author: "Gayle" },
+    { id: "b-102", title: "Clean Code", author: "Robert C. Martin" },
+    { id: "b-103", title: "Introduction to Algorithms", author: "Cormen" },
+    { id: "b-104", title: "Design Patterns", author: "Erich." }
+];
+
+const foundPost = books.find((book) => book.id === 'b-104')
+console.log(foundPost)
+```
+
+Time complexity of this code is: O(n)
 
 ## Space Complexity
 Space complexity measures how the memory of an algorithm grows as the input size (n) grows.
