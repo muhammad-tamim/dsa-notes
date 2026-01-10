@@ -1,16 +1,11 @@
-let n = 11245;
+const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 600]
+]);
 
-while (n > 0) {
-    let digit = n % 10;
-    console.log(digit)
 
-    n = Math.floor(n / 10)
-}
+console.log(fruits) // Map(3) { 'apples' => 500, 'bananas' => 300, 'oranges' => 600 }
 
-/*
-5
-4
-2
-1
-1
-*/
+const fruitsArr = [...fruits]; // [['Alice','Admin'], ['Bob','Editor']]
+console.log(fruitsArr) // [ [ 'apples', 500 ], [ 'bananas', 300 ], [ 'oranges', 600 ] ]

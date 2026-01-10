@@ -6,12 +6,28 @@
   - [Time Complexity](#time-complexity)
     - [Time Complexity Growth Comparison:](#time-complexity-growth-comparison)
     - [Constraints of Coding Problem Set:](#constraints-of-coding-problem-set)
+    - [How to check code real time using js:](#how-to-check-code-real-time-using-js)
   - [Space Complexity](#space-complexity)
 - [Part 1: Data Structure](#part-1-data-structure)
-  - [Stack](#stack)
-  - [Queue](#queue)
-  - [Linked List](#linked-list)
-  - [Graph](#graph)
+  - [Array](#array)
+  - [String](#string)
+  - [Hash Table](#hash-table)
+    - [set:](#set)
+      - [How to create a set:](#how-to-create-a-set)
+      - [Iterating:](#iterating)
+      - [Common set methods and properties:](#common-set-methods-and-properties)
+        - [methods:](#methods)
+        - [properties:](#properties)
+      - [Logic methods:](#logic-methods)
+      - [Converting array to set and set to array:](#converting-array-to-set-and-set-to-array)
+      - [Example:](#example)
+    - [map](#map)
+      - [Difference between Objects and Maps](#difference-between-objects-and-maps)
+      - [How to Create a Map:](#how-to-create-a-map)
+      - [Iterating:](#iterating-1)
+      - [Common map methods and properties:](#common-map-methods-and-properties)
+        - [Methods:](#methods-1)
+        - [Properties:](#properties-1)
 - [Part 2: Algorithms](#part-2-algorithms)
   - [Time and Space Complexity](#time-and-space-complexity)
   - [Searching](#searching)
@@ -42,8 +58,8 @@ Common Notations Complexities(Best --> Worse):
 | ---------- | ----------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
 | O(1)       | Constant Time     | Number of operations/steps does not grow with input size                                 | Accessing arr[5], sum of 1 to N using formula               |
 | O(log n)   | Logarithmic Time  | Each step cuts the input size in half.                                                   | Binary search                                               |
-| O(n)       | Linear Time       | One loop for traversing input or recursion where each call reduces the problem size by 1 | Traversing array, find factorial by recursion               |
-| O(n log n) | Linearithmic Time | Divide the problem, then loop through all elements (divide + loop).                      | Merge sort, Quick sort(avg), Heap sort, Grady built in sort |
+| O(n)       | Linear Time       | One loop for traversing input or recursion where each call reduces the problem size by 1 | Loop over array, find factorial by recursion                |
+| O(n log n) | Linearithmic Time | O(n log n) = O(n) × O(log n)                                                             | Merge sort, Quick sort(avg), Heap sort, Grady built in sort |
 | O(n²)      | Quadratic Time    | Double nested loops over the same input.                                                 | Bubble & Selection sort                                     |
 | O(n3)      | Cubic Time        | Three nested loops over the same input.                                                  |                                                             |
 | O(2ⁿ)      | Exponential Time  | Recursive function where each call makes 2 more calls.                                   |                                                             |
@@ -162,6 +178,8 @@ for factorial(5):
 so, Time Complexity for recursion: (number of calls) × (work per call) = O(n) * O(1) = O(n)
 ```
 
+
+
 ### Time Complexity Growth Comparison:
 
 | Big-O          | n = 10 | n = 100 | n = 1,000 | n = 100,000 | n = 10,000,000 | n = 1,000,000,000 |
@@ -179,17 +197,27 @@ For most of the platform like Codeforces, CodeChef, LeetCode we can perform 1s �
 
 Note: ≈ means approximately
 
-Common constrains for assuming complexity for problems: 
+| Big-O          | **Max Input Size (≈ 1s)** |
+| -------------- | ------------------------- |
+| **O(1)**       | **Unlimited**             |
+| **O(log n)**   | **Up to 10¹⁸+**           |
+| **O(n)**       | **~10⁷ – 10⁸**            |
+| **O(n log n)** | **~10⁶ – 10⁷**            |
+| **O(n²)**      | **~10³ – 10⁴**            |
+| **O(n³)**      | **~300 – 500**            |
+| **O(2ⁿ)**      | **~20 – 25**              |
+| **O(n!)**      | **~10 – 11**              |
 
-| n         | Allowed Complexity | Notes / Examples              |
-| --------- | ------------------ | ----------------------------- |
-| n ≥ 10⁸   | O(1), O(log n)     | Binary search, simple formula |
-| n ≤ 10⁶   | O(n), O(n log n)   | Array traversal, sorting      |
-| n ≤ 10⁴   | O(n²)              | Nested loops, DP on 2D grid   |
-| n ≤ 500   | O(n³)              | Triple nested loops, cubic DP |
-| n ≤ 20–25 | O(2ⁿ)              | Brute force, Recursion        |
-| n ≤ 12    | O(n!)              | Permutations, TSP brute force |
 
+### How to check code real time using js: 
+
+```js
+console.time("program")
+for (let i = 1; i <= 5; i++) {
+    console.log(i)
+}
+console.timeEnd("program") // program: 5.603ms
+```
 
 ## Space Complexity
 Space complexity measures how the memory of an algorithm grows as the input size (n) grows.
@@ -214,13 +242,440 @@ Space Complexity: O(n)
 ```
 
 # Part 1: Data Structure
-## Stack 
 
-## Queue
+## Array 
 
-## Linked List
+https://github.com/muhammad-tamim/javascript-notes?tab=readme-ov-file#array
 
-## Graph
+## String 
+
+https://github.com/muhammad-tamim/JavaScript-notes?tab=readme-ov-file#string
+
+## Hash Table
+
+### set:
+A Set is a collection of unique values. It automatically removes duplicates and can store values of any type (primitive or object).
+
+#### How to create a set:
+
+Way 1:
+
+```js
+// Create a Set with initial values
+const numbers = new Set([1, 2, 3, 4, 4, 5]); // duplicates ignored
+
+console.log(numbers); // Set(5) {1, 2, 3, 4, 5}
+```
+
+Way 2: 
+
+```js
+// Create an empty Set
+const letters = new Set();
+
+// Add Values to the Set
+letters.add("a");
+letters.add("b");
+letters.add("c");
+
+console.log(letters) // Set(3) { 'a', 'b', 'c' }
+```
+
+you can also add variable to set: 
+
+```js
+// Create a Set
+const letters = new Set();
+
+// Create Variables
+const a = "a";
+const b = "b";
+const c = "c";
+
+// Add Variables to the Set
+letters.add(a);
+letters.add(b);
+letters.add(c);
+
+console.log(letters) // Set(3) { 'a', 'b', 'c' }
+```
+
+#### Iterating:
+
+```js
+const colors = new Set(["red", "green", "blue"]);
+
+// Using for...of
+for (let color of colors) {
+  console.log(color);
+}
+
+// Using forEach
+colors.forEach((value) => {
+  console.log(value);
+});
+```
+
+#### Common set methods and properties: 
+
+##### methods:
+- delete():
+  
+```js
+const colors = new Set(["red", "green", "blue"]);
+
+fruits.delete("red");
+console.log(fruits); // Set(2) {"green", "blue"}
+```
+
+- clear(): Clear all values of set
+
+```js
+const colors = new Set(["red", "green", "blue"]);
+
+fruits.clear();
+console.log(colors); // Set(0) {}
+```
+
+- has():
+
+```js
+const letters = new Set(["a", "b", "c"]);
+
+answer = letters.has("d");
+console.log(answer); // false
+```
+
+##### properties:
+- size: 
+
+```js
+const mySet = new Set(["a", "b", "c"]);
+
+console.log(mySet.size); // 3
+```
+
+####  Logic methods: 
+In JavaScript 2025, 7 new logical methods were added to the Set object: union(), intersection(), difference(), isDisjointFrom(), isSubsetOf(),isSupersetOf(), symmetricDifference()
+
+- union(): 
+  
+![image](./images/set-union.jpg)
+
+```js
+const A = new Set(['a', 'b', 'c']);
+const B = new Set(['b', 'c', 'd']);
+
+const C = A.union(B);
+
+console.log(C) // Set(4) { 'a', 'b', 'c', 'd' }
+```
+
+- intersection():
+
+![image](./images/set-intersection.jpg)
+
+```js
+const A = new Set(['a', 'b', 'c']);
+const B = new Set(['b', 'c', 'd']);
+
+const C = A.intersection(B);
+
+console.log(C) // Set(2) { 'b', 'c' }
+```
+
+- difference():
+
+![image](./images/set_difference.jpg)
+
+```js
+const A = new Set(['a', 'b', 'c']);
+const B = new Set(['b', 'c', 'd']);
+
+const C = A.difference(B);
+
+console.log(C) // Set(1) { 'a' }
+```
+
+- symmetricDifference():
+
+![image](./images/set_symmetric_difference.jpg)
+
+```js
+const A = new Set(['a', 'b', 'c']);
+const B = new Set(['b', 'c', 'd']);
+
+const C = A.symmetricDifference(B);
+
+console.log(C) // Set(1) { 'a' }
+```
+
+- isDisjointFrom(): 
+The isDisjointFrom() method returns true if this set has no elements in common with the argument set:
+
+![image](./images/set-isDisjointFrom.png)
+
+```js
+const A = new Set(['a', 'b', 'c']);
+const B = new Set(['b', 'c', 'd']);
+
+let answer = A.isDisjointFrom(B);
+
+console.log(answer) // Set(1) { 'a' }
+```
+
+
+#### Converting array to set and set to array: 
+
+```js
+const nums = [1, 2, 2, 3, 4, 4];
+const uniqueNums = new Set(nums); // remove duplicates
+console.log(uniqueNums); // Set {1, 2, 3, 4}
+
+const uniqueArray = [...uniqueNums];
+// const uniqueArray = Array.from(uniqueNums)
+
+console.log(uniqueArray); // [1, 2, 3, 4]
+```
+
+#### Example: 
+
+Example 1: remove all duplicates array element: 
+
+- Brute force: Brute force is solving a problem by checking all possible solutions without optimization.
+
+```js
+function removeDupArr(arr) {
+    const newArr = []
+
+    arr.forEach(element => {
+        if (!newArr.includes(element)) {
+            newArr.push(element)
+        }
+    });
+
+    return newArr
+}
+```
+Time Complexity: O(n^2)
+
+- With Set: 
+- 
+```js
+function removeDupArr(arr) {
+    const set = new Set(arr)
+
+    return Array.form(set)
+}
+```
+Time Complexity: O(n)
+
+### map
+A Map is a collection of key-value pairs, where keys can be any type (unlike objects which convert keys to strings). 
+
+#### Difference between Objects and Maps
+
+| Object                            | Map                      |
+| --------------------------------- | ------------------------ |
+| Not directly iterable             | Directly iterable        |
+| Keys must be Strings (or Symbols) | Keys can be any datatype |
+
+#### How to Create a Map:
+
+Way 1: 
+
+```js
+const userRoles = new Map([
+    ["Alice", "Admin"],
+    ["Bob", "Editor"],
+    ["Charlie", "Viewer"]
+]);
+
+console.log(userRoles); // Map(3) { 'Alice' => 'Admin', 'Bob' => 'Editor', 'Charlie' => 'Viewer' }
+```
+
+Way 2: 
+
+```js
+// Create an empty Map
+const fruits = new Map();
+
+// Set Map Values
+fruits.set("apples", 500);
+fruits.set("bananas", 300);
+fruits.set("oranges", 600);
+// set is also used to changing map values
+fruits.set("oranges", 200);
+
+console.log(fruits) // Map(3) { 'apples' => 500, 'bananas' => 300, 'oranges' => 200 }
+```
+
+you can also add objects as a key to map:
+
+```js
+const apples = { name: 'Apples' };
+const bananas = { name: 'Bananas' };
+const oranges = { name: 'Oranges' };
+
+const fruits = new Map();
+
+fruits.set(apples, 500);
+fruits.set(bananas, 300);
+fruits.set(oranges, 200);
+
+console.log(fruits)
+
+/*
+Map(3) {
+  { name: 'Apples' } => 500,
+  { name: 'Bananas' } => 300,
+  { name: 'Oranges' } => 200
+}
+*/
+```
+
+#### Iterating: 
+
+```js
+const person = new Map([
+    ["name", "Alice"],
+    ["age", 25],
+    ["city", "New York"]
+]);
+
+// for...of
+for (let [key, value] of person) {
+    console.log(`${key}: ${value}`);
+}
+
+// forEach
+person.forEach((value, key) => {
+    console.log(`${key}: ${value}`);
+});
+```
+
+#### Common map methods and properties:
+
+##### Methods: 
+- get(): 
+
+```js
+const fruits = new Map();
+
+// Set Map Values
+fruits.set("apples", 500);
+fruits.set("bananas", 300);
+fruits.set("oranges", 600);
+
+console.log(fruits.get("apples")) // 500
+```
+
+- delete():
+
+```js
+const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 600]
+]);
+
+fruits.delete("oranges")
+
+console.log(fruits) // Map(2) { 'apples' => 500, 'bananas' => 300 }
+```
+
+- clear():
+
+```js
+const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 600]
+]);
+
+fruits.clear(fruits)
+
+console.log(fruits) // Map(0) {}
+```
+
+- has():
+
+```js
+const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 600]
+]);
+
+console.log(fruits.has("oranges")) // true
+```
+
+- entries():
+
+The entries() method returns an iterator object with the [key,values] in a map:
+
+```js
+const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 600]
+]);
+
+
+console.log(fruits.entries())
+
+/*
+[Map Entries] {
+  [ 'apples', 500 ],
+  [ 'bananas', 300 ],
+  [ 'oranges', 600 ]
+}
+*/
+```
+
+- keys():
+
+The keys() method returns an iterator object with the keys in a map:
+
+```js
+const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 600]
+]);
+
+
+console.log(fruits.keys()) // [Map Iterator] { 'apples', 'bananas', 'oranges' }
+```
+
+- values():
+
+The values() method returns an iterator object with the values in a map:
+
+```js
+const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 600]
+]);
+
+
+console.log(fruits.values()) // [Map Iterator] { 500, 300, 600 }
+```
+
+##### Properties:
+
+- size: 
+
+```js
+const fruits = new Map();
+
+fruits.set("apples", 500);
+fruits.set("bananas", 300);
+fruits.set("oranges", 600);
+
+console.log(fruits.size) // 3
+```
 
 # Part 2: Algorithms
 ## Time and Space Complexity
