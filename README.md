@@ -30,6 +30,7 @@
         - [Methods:](#methods-1)
         - [Properties:](#properties-1)
   - [Stack:](#stack)
+  - [Queue:](#queue)
 - [Part 2: Algorithms](#part-2-algorithms)
   - [Time and Space Complexity](#time-and-space-complexity)
   - [Searching](#searching)
@@ -791,6 +792,27 @@ console.log(stack.peek()); // 10
 console.log(stack.isEmpty()) // false
 console.log(stack.size()); // 2
 ```
+
+## Queue:
+A Queue is a linear data structure that follows: FIFO – First In, First Out
+
+| Term        | Meaning        |
+| ----------- | -------------- |
+| **Front**   | First element  |
+| **Rear**    | Last element   |
+| **Enqueue** | Insert element |
+| **Dequeue** | Remove element |
+
+
+| Operation | Description               |
+| --------- | ------------------------- |
+| `enqueue` | Add element at rear       |
+| `dequeue` | Remove element from front |
+| `peek`    | View front element        |
+| `isEmpty` | Check if queue empty      |
+| `size`    | Number of elements        |
+
+
 
 # Part 2: Algorithms
 ## Time and Space Complexity

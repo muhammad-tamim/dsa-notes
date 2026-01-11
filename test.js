@@ -1,15 +1,15 @@
-class Stack {
+class Queue {
     constructor() {
         this.items = [];
     }
 
-    push(element) {
+    enqueue(element) {
         this.items.push(element);
     }
 
-    pop() {
+    dequeue() {
         if (this.isEmpty()) return "Stack is empty";
-        return this.items.pop();
+        return this.items.shift();
     }
 
     peek() {
@@ -17,7 +17,7 @@ class Stack {
             return "Stack is empty"
         }
 
-        return this.items[this.items.length - 1]
+        return this.items[0]
     }
 
     isEmpty() {
@@ -33,17 +33,17 @@ class Stack {
     }
 }
 
-const stack = new Stack()
-stack.print() // []
+const queue = new Queue()
+queue.print() // []
 
-stack.push(5);
-stack.push(10);
-stack.push(8);
-stack.print() // [ 5, 10, 8 ]
+queue.enqueue(5);
+queue.enqueue(10);
+queue.enqueue(8);
+queue.print() // [ 5, 10, 8 ]
 
-console.log(stack.pop());  // 8
-stack.print() // [ 5, 10 ]
+console.log(queue.dequeue());  // 5
+queue.print() // [ 10, 8 ]
 
-console.log(stack.peek()); // 10
-console.log(stack.isEmpty()) // false
-console.log(stack.size()); // 2
+console.log(queue.peek()); // 10
+console.log(queue.isEmpty()) // false
+console.log(queue.size()); // 2
