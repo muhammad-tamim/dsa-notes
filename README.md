@@ -29,6 +29,7 @@
       - [Common map methods and properties:](#common-map-methods-and-properties)
         - [Methods:](#methods-1)
         - [Properties:](#properties-1)
+  - [Linked List:](#linked-list)
   - [Stack:](#stack)
   - [Queue:](#queue)
 - [Part 2: Algorithms](#part-2-algorithms)
@@ -729,6 +730,264 @@ fruits.set("oranges", 600);
 console.log(fruits.size) // 3
 ```
 
+
+## Linked List: 
+A Linked List is a linear data structure where:
+- Elements are called nodes
+- Each node stores:
+  - Data
+  - Reference (pointer) to the next node
+
+| Term | Meaning               |
+| ---- | --------------------- |
+| Head | First node            |
+| Tail | Last node             |
+| Node | Data + pointer        |
+| Next | Link to next node     |
+| Prev | Link to previous node |
+
+
+Basic implementation:
+
+```js
+class Node {
+    constructor(value) {
+        this.value = value
+        this.next = null
+    }
+}
+
+const head = new Node(10)
+head.next = new Node(20)
+head.next.next = new Node(30)
+console.log(head)
+
+let temp = head
+
+while (temp !== null) {
+    console.log(temp.value)
+    temp = temp.next
+}
+```
+
+Full implementation: 
+
+```js
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.size = 0;
+  }
+
+  // Add at end
+  append(value) {
+    const newNode = new Node(value);
+
+    if (!this.head) {
+      this.head = newNode;
+    } else {
+      let current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = newNode;
+    }
+    this.size++;
+  }
+
+  // Add at beginning
+  prepend(value) {
+    const newNode = new Node(value);
+    newNode.next = this.head;
+    this.head = newNode;
+    this.size++;
+  }
+
+  // Remove by value
+  remove(value) {
+    if (!this.head) return;
+
+    if (this.head.value === value) {
+      this.head = this.head.next;
+      this.size--;
+      return;
+    }
+
+    let current = this.head;
+    while (current.next && current.next.value !== value) {
+      current = current.next;
+    }
+
+    if (current.next) {
+      current.next = current.next.next;
+      this.size--;
+    }
+  }
+
+  // Search
+  search(value) {
+    let current = this.head;
+    while (current) {
+      if (current.value === value) return true;
+      current = current.next;
+    }
+    return false;
+  }
+
+  // Print list
+  print() {
+    let current = this.head;
+    let result = "";
+    while (current) {
+      result += current.value + " -> ";
+      current = current.next;
+    }
+    console.log(result + "null");
+  }
+}
+
+const list = new LinkedList();
+list.append(10);
+list.append(20);
+list.prepend(5);
+
+list.print(); // 5 -> 10 -> 20 -> null
+```
+
+version 2: 
+
+```js
+class Node {
+    constructor(value) {
+        this.value = value
+        this.next = null
+    }
+}
+
+class LinkedList {
+    constructor() {
+        this.head = null
+        this.tail = null
+        this.length = 0
+    }
+
+    append(value) {
+        const newNode = new Node(value)
+
+        if (this.head === null) {
+            this.head = newNode
+            this.tail = newNode
+        }
+        else {
+            this.tail.next = newNode
+            this.tail = newNode
+        }
+        this.length++
+        return this
+    }
+
+    prepend(value) {
+        const newNode = new Node(value)
+
+        if (this.head === null) {
+            this.head = newNode
+            this.tail = newNode
+        }
+        else {
+            newNode.next = this.head
+            this.head = newNode
+        }
+        this.length++
+        return this
+    }
+
+    insert(index, value) {
+        if (index < 0 || index > this.length) {
+            console.error("index not found")
+            return undefined
+        }
+
+        if (index === 0) {
+            return this.prepend(value)
+        }
+        if (index === this.length) {
+            return this.append(value)
+        }
+
+
+        const leadingNode = this._traverseToIndex(index - 1)
+        const holdingNode = leadingNode.next
+
+        const newNode = new Node(value)
+
+        leadingNode.next = newNode
+        newNode.next = holdingNode
+
+        this.length++
+    }
+
+    _traverseToIndex(index) {
+        let count = 0
+        let currentNode = this.head
+
+        while (count !== index) {
+            currentNode = currentNode.next
+            count++
+        }
+        return currentNode
+    }
+
+    remove(index) {
+
+        if (index === 0) {
+            const removedItem = this.head.next
+
+            this.head = this.head.next
+
+            if (this.length === 1) {
+                this.tail = null
+            }
+
+            this.length--;
+            return removedItem
+        }
+
+        const leadingNode = this._traverseToIndex(index - 1)
+        const nodeToRemove = leadingNode.next
+
+        leadingNode.next = nodeToRemove.next
+
+        if (leadingNode.next === null) {
+            this.tail = leadingNode
+        }
+
+        return nodeToRemove.value
+    }
+
+    print() {
+        let currentNode = this.head
+        while (currentNode !== null) {
+            console.log(currentNode.value)
+            currentNode = currentNode.next
+        }
+    }
+}
+
+const linkedList = new LinkedList()
+
+linkedList.append(50).append(60).append(70)
+
+linkedList.prepend(30).prepend(20).prepend(10)
+
+linkedList.insert(3, 40)
+
+linkedList.print()
+
+linkedList.remove(2)
+
+console.log("------------")
+linkedList.print()
+```
 
 ## Stack: 
 A Stack is a linear data structure that follows the rule: LIFO – Last In, First Out.
