@@ -31,7 +31,11 @@
         - [Properties:](#properties-1)
   - [Linked List:](#linked-list)
   - [Stack:](#stack)
+    - [Using Array:](#using-array)
+    - [Using Linked List:](#using-linked-list)
   - [Queue:](#queue)
+    - [Using array:](#using-array-1)
+    - [Using Linked List:](#using-linked-list-1)
 - [Part 2: Algorithms](#part-2-algorithms)
   - [Time and Space Complexity](#time-and-space-complexity)
   - [Searching](#searching)
@@ -1000,6 +1004,8 @@ A Stack is a linear data structure that follows the rule: LIFO – Last In, Firs
 | `isEmpty` | Check if empty     |
 | `size`    | Number of elements |
 
+### Using Array:
+
 ```js
 class Stack {
     constructor() {
@@ -1051,6 +1057,7 @@ console.log(stack.peek()); // 10
 console.log(stack.isEmpty()) // false
 console.log(stack.size()); // 2
 ```
+### Using Linked List: 
 
 ## Queue:
 A Queue is a linear data structure that follows: FIFO – First In, First Out
@@ -1071,7 +1078,61 @@ A Queue is a linear data structure that follows: FIFO – First In, First Out
 | `isEmpty` | Check if queue empty      |
 | `size`    | Number of elements        |
 
+### Using array: 
 
+```js
+class Queue {
+    constructor() {
+        this.items = [];
+    }
+
+    enqueue(element) {
+        this.items.push(element);
+    }
+
+    dequeue() {
+        if (this.isEmpty()) return "Stack is empty";
+        return this.items.shift();
+    }
+
+    peek() {
+        if (this.isEmpty()) {
+            return "Stack is empty"
+        }
+
+        return this.items[0]
+    }
+
+    isEmpty() {
+        return this.items.length === 0;
+    }
+
+    size() {
+        return this.items.length;
+    }
+
+    print() {
+        console.log(this.items)
+    }
+}
+
+const queue = new Queue()
+queue.print() // []
+
+queue.enqueue(5);
+queue.enqueue(10);
+queue.enqueue(8);
+queue.print() // [ 5, 10, 8 ]
+
+console.log(queue.dequeue());  // 5
+queue.print() // [ 10, 8 ]
+
+console.log(queue.peek()); // 10
+console.log(queue.isEmpty()) // false
+console.log(queue.size()); // 2
+```
+
+### Using Linked List:
 
 # Part 2: Algorithms
 ## Time and Space Complexity
