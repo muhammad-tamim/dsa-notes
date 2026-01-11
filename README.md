@@ -29,6 +29,7 @@
       - [Common map methods and properties:](#common-map-methods-and-properties)
         - [Methods:](#methods-1)
         - [Properties:](#properties-1)
+  - [Stack:](#stack)
 - [Part 2: Algorithms](#part-2-algorithms)
   - [Time and Space Complexity](#time-and-space-complexity)
   - [Searching](#searching)
@@ -725,6 +726,70 @@ fruits.set("bananas", 300);
 fruits.set("oranges", 600);
 
 console.log(fruits.size) // 3
+```
+
+
+## Stack: 
+A Stack is a linear data structure that follows the rule: LIFO – Last In, First Out.
+
+| Operation | Description        |
+| --------- | ------------------ |
+| `push`    | Add element to top |
+| `pop`     | Remove top element |
+| `peek`    | View top element   |
+| `isEmpty` | Check if empty     |
+| `size`    | Number of elements |
+
+```js
+class Stack {
+    constructor() {
+        this.items = [];
+    }
+
+    push(element) {
+        this.items.push(element);
+    }
+
+    pop() {
+        if (this.isEmpty()) return "Stack is empty";
+        return this.items.pop();
+    }
+
+    peek() {
+        if (this.isEmpty()) {
+            return "Stack is empty"
+        }
+
+        return this.items[this.items.length - 1]
+    }
+
+    isEmpty() {
+        return this.items.length === 0;
+    }
+
+    size() {
+        return this.items.length;
+    }
+
+    print() {
+        console.log(this.items)
+    }
+}
+
+const stack = new Stack()
+stack.print() // []
+
+stack.push(5);
+stack.push(10);
+stack.push(8);
+stack.print() // [ 5, 10, 8 ]
+
+console.log(stack.pop());  // 8
+stack.print() // [ 5, 10 ]
+
+console.log(stack.peek()); // 10
+console.log(stack.isEmpty()) // false
+console.log(stack.size()); // 2
 ```
 
 # Part 2: Algorithms

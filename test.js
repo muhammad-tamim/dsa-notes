@@ -1,10 +1,49 @@
-const books = [
-    { id: "b-101", title: "Cracking the Coding Interview", author: "Gayle" },
-    { id: "b-102", title: "Clean Code", author: "Robert C. Martin" },
-    { id: "b-103", title: "Introduction to Algorithms", author: "Cormen" },
-    { id: "b-104", title: "Design Patterns", author: "Erich." }
-];
+class Stack {
+    constructor() {
+        this.items = [];
+    }
 
-const foundPost = books.find((book) => book.id === 'b-104')
-console.log(foundPost)
+    push(element) {
+        this.items.push(element);
+    }
 
+    pop() {
+        if (this.isEmpty()) return "Stack is empty";
+        return this.items.pop();
+    }
+
+    peek() {
+        if (this.isEmpty()) {
+            return "Stack is empty"
+        }
+
+        return this.items[this.items.length - 1]
+    }
+
+    isEmpty() {
+        return this.items.length === 0;
+    }
+
+    size() {
+        return this.items.length;
+    }
+
+    print() {
+        console.log(this.items)
+    }
+}
+
+const stack = new Stack()
+stack.print() // []
+
+stack.push(5);
+stack.push(10);
+stack.push(8);
+stack.print() // [ 5, 10, 8 ]
+
+console.log(stack.pop());  // 8
+stack.print() // [ 5, 10 ]
+
+console.log(stack.peek()); // 10
+console.log(stack.isEmpty()) // false
+console.log(stack.size()); // 2
