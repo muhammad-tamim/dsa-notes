@@ -12,7 +12,7 @@
     - [How to check code real time using js:](#how-to-check-code-real-time-using-js)
     - [Lookup Table:](#lookup-table)
   - [Space Complexity](#space-complexity)
-- [Part 1: Data Structure](#part-1-data-structure)
+- [Part 1: Data Structures](#part-1-data-structures)
   - [Array](#array)
   - [String](#string)
   - [Hash Table](#hash-table)
@@ -149,7 +149,7 @@ Common Notations Complexities(Best --> Worse):
 | O(2ⁿ)      | Exponential Time  | Recursive function where each call makes 2 more calls.                                   |                                                             |
 | O(n!)      | Factorial Time    | Trying every possible ordering (permutations)                                            |                                                             |
 
-![image](./images/big-o-notation-graph.jpg)
+![image](./assets/images/introduction/big-o-notation/big-o-notation-graph.jpg)
 
 ### Rules of Big-O Notation:
 - Ignore Constants:
@@ -374,7 +374,7 @@ for (...) {
 Space Complexity: O(n)
 ```
 
-# Part 1: Data Structure
+# Part 1: Data Structures
 
 ## Array 
 
@@ -493,7 +493,7 @@ In JavaScript 2025, 7 new logical methods were added to the Set object: union(),
 
 - union(): 
   
-![image](./images/set-union.jpg)
+![image](./assets/images/part-1-data-structures/hash-table/set/set-union.jpg)
 
 ```js
 const A = new Set(['a', 'b', 'c']);
@@ -506,7 +506,7 @@ console.log(C) // Set(4) { 'a', 'b', 'c', 'd' }
 
 - intersection():
 
-![image](./images/set-intersection.jpg)
+![image](./assets/images/part-1-data-structures/hash-table/set/set-intersection.jpg)
 
 ```js
 const A = new Set(['a', 'b', 'c']);
@@ -518,8 +518,8 @@ console.log(C) // Set(2) { 'b', 'c' }
 ```
 
 - difference():
-
-![image](./images/set_difference.jpg)
+  
+![image](./assets/images/part-1-data-structures/hash-table/set/set_difference.jpg)
 
 ```js
 const A = new Set(['a', 'b', 'c']);
@@ -532,7 +532,7 @@ console.log(C) // Set(1) { 'a' }
 
 - symmetricDifference():
 
-![image](./images/set_symmetric_difference.jpg)
+![image](./assets/images/part-1-data-structures/hash-table/set/set_symmetric_difference.jpg)
 
 ```js
 const A = new Set(['a', 'b', 'c']);
@@ -546,7 +546,7 @@ console.log(C) // Set(1) { 'a' }
 - isDisjointFrom(): 
 The isDisjointFrom() method returns true if this set has no elements in common with the argument set:
 
-![image](./images/set-isDisjointFrom.png)
+![image](./assets/images/part-1-data-structures/hash-table/set/set-isDisjointFrom.png)
 
 ```js
 const A = new Set(['a', 'b', 'c']);
