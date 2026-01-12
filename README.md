@@ -44,11 +44,9 @@
 - [Part 2: Algorithms](#part-2-algorithms)
   - [Sorting:](#sorting)
     - [Bubble Sort:](#bubble-sort)
-      - [How bubble sort works:](#how-bubble-sort-works)
-      - [Time \& Space Complexity (Bubble Sort)](#time--space-complexity-bubble-sort)
     - [Selection Sort:](#selection-sort)
       - [How selection sort works:](#how-selection-sort-works)
-      - [Time \& Space Complexity (Bubble Sort)](#time--space-complexity-bubble-sort-1)
+      - [Time \& Space Complexity (Bubble Sort)](#time--space-complexity-bubble-sort)
     - [Insertion Sort:](#insertion-sort)
       - [How insertion sort works:](#how-insertion-sort-works)
       - [Time \& Space Complexity:](#time--space-complexity)
@@ -1450,65 +1448,70 @@ Sorting means arranging elements in:
 - Ascending order → 1 2 3 4
 - Descending order → 4 3 2 1
 
-### Bubble Sort:
-Bubble sort repeatedly swaps adjacent elements if they are in the wrong order. After each pass, the largest element “bubbles” to the end.
+### Bubble Sort: 
+Bubble Sort is an algorithm that sorts an array from the lowest value to the highest value (ascending order).
 
-```js 
-let arr = [5, 1, 4, 2]
+![alt text](./assets/gifs/part-2-algorithms/sorting/bubble-sort/bubble-sort-1.gif)
 
-for (let i = 0; i < arr.length - 1; i++) {
-    for (let j = 0; j < arr.length - 1 - i; j++) {
-        if (arr[j] > arr[j + 1]) {
-            // swap
-            let temp = arr[j];
-            arr[j] = arr[j + 1];
-            arr[j + 1] = temp;
+**How it works:**
+- Go through the array, one value at a time.
+- For each value, compare the value with the next value.
+- If the value is higher than the next one, swap the values so that the highest value comes last.
+- Go through the array as many times as there are values in the array.
+
+**Implementation:**
+
+```js
+function bubbleSort(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = 0; j < arr.length - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                let temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+            }
         }
     }
+    console.log(arr)
 }
 
-console.log(arr); // [1, 2, 4, 5]
+bubbleSort([7, 12, 9, 11, 3]) // [ 3, 7, 9, 11, 12 ]
 ```
 
-#### How bubble sort works: 
+- Time complexity: O(n^2)
+- Space complexity: O(1)
+ 
+![alt text](./assets/gifs/part-2-algorithms/sorting/bubble-sort/bubble-sort-2.gif)
 
-`let arr = [5, 1, 4, 2]`
+![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort-1.png)
+![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort-2.png)
+![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort-3.png)
+![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort-4.png)
 
-Pass 1: i = 0; i < 3:
-
-1st largest number 5 will move to the end
-
-| j   | condition    | Compare      | Array State(after swap) |
-| --- | ------------ | ------------ | ----------------------- |
-| 0   | 0 < 3 = true | 5 > 1 = true | [1, 5, 4, 2]            |
-| 1   | 1 < 3 = true | 5 > 4 = true | [1, 4, 5, 2]            |
-| 2   | 2 < 3 = true | 5 > 2 = true | [1, 4, 2, 5]            |
-
-Pass 2: i = 1; i < 3:
-
-2nd largest number 4 moved to its position before 5:
-
-| j   | condition    | Compare       | Array State(after swap)               |
-| --- | ------------ | ------------- | ------------------------------------- |
-| 0   | 0 < 2 = true | 1 > 4 = false |                                       |
-| 1   | 1 < 2 = true | 4 > 2 = true  | [1, 2, 4, 5] (Sorted ascending order) |
-
-Pass 3: i = 2; i < 3:
-
-| j   | condition    | Compare       | Array State |
-| --- | ------------ | ------------- | ----------- |
-| 0   | 0 < 1 = true | 1 > 2 = false |             |
+[To see the full draw](./assets/draw/part-2-algorithms/bubble-sort/bubble-sort.excalidraw)
 
 
+**Note:** The Bubble Sort algorithm can be improved a little bit more. Imagine the array will be sorted after the first run, then the later operation are waste of time.
 
-#### Time & Space Complexity (Bubble Sort)
+```js
+function bubbleSort(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        let isSwapped = false
+        for (let j = 0; j < arr.length - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                let temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+                isSwapped = true
+            }
+            if (!isSwapped) break
+        }
+    }
+    console.log(arr)
+}
 
-| Case    | Time                       |
-| ------- | -------------------------- |
-| Best    | O(n) *(optimized version)* |
-| Average | O(n²)                      |
-| Worst   | O(n²)                      |
-| Space   | O(1)                       |
+bubbleSort([7, 3, 9, 12, 11]) // [ 3, 7, 9, 11, 12 ]
+```
 
 ### Selection Sort:
 Selection sort finds the smallest element and places it at the correct position.
