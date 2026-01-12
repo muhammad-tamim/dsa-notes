@@ -2,6 +2,7 @@
 
 - [Introduction:](#introduction)
   - [Classification of Data Structure:](#classification-of-data-structure)
+  - [Brute Force:](#brute-force)
   - [Big-O Notation](#big-o-notation)
     - [Rules of Big-O Notation:](#rules-of-big-o-notation)
   - [Time Complexity](#time-complexity)
@@ -70,6 +71,40 @@ DSA stands for Data Structures and Algorithms:
   - array, linkedList, stack, queue, dequeue
 - Non-linear: Not arranged sequentially means one element can be connected to multiple elements.
   - tree, binary tree, binary search tree, heap, graph
+
+## Brute Force: 
+Brute force is a simple, initial and straight forward approach to solving a problem by trying all possible solutions without using any optimized algorithms. 
+
+For example: 
+- Finding Maximum in Array
+
+```js
+let arr = [3, 7, 2, 9, 5];
+let max = arr[0];
+
+for (let i = 1; i < arr.length; i++) {
+    if (arr[i] > max) {
+        max = arr[i];
+    }
+}
+
+console.log(max); // 9
+```
+
+- Finding all pairs that sum to a target:
+
+```js
+let arr = [1, 2, 3, 4];
+let target = 5;
+
+for (let i = 0; i < arr.length; i++) {
+    for (let j = i+1; j < arr.length; j++) {
+        if (arr[i] + arr[j] === target) {
+            console.log(arr[i], arr[j]);
+        }
+    }
+}
+```
 
 ## Big-O Notation
 Big-O notation is a mathematical way to describe the worst-case time or space complexity of an algorithm as the input size grows.
