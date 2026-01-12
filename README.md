@@ -1,6 +1,7 @@
 <h1 align="center">Data Structure and Algorithms Notes</h1>
 
 - [Introduction:](#introduction)
+  - [Classification of Data Structure:](#classification-of-data-structure)
   - [Big-O Notation](#big-o-notation)
     - [Rules of Big-O Notation:](#rules-of-big-o-notation)
   - [Time Complexity](#time-complexity)
@@ -60,6 +61,16 @@
 
 
 # Introduction: 
+DSA stands for Data Structures and Algorithms: 
+- Data Structures is about how data can be stored in different structures.
+- Algorithms is about how to solve different problems efficiently by flowing step by step instructions for each, using data structures.
+
+## Classification of Data Structure: 
+- Linear: Arranged sequentially means one element can only connected to its next element.
+  - array, linkedList, stack, queue, dequeue
+- Non-linear: Not arranged sequentially means one element can be connected to multiple elements.
+  - tree, binary tree, binary search tree, heap, graph
+
 ## Big-O Notation
 Big-O notation is a mathematical way to describe the worst-case time or space complexity of an algorithm as the input size grows.
 
@@ -114,7 +125,7 @@ function linearSearch(arr, target) {
 
 
 ## Time Complexity
-Time complexity measures how the run time of an algorithm grows as the input size (n) grows.
+Time complexity measures how much the run time of an algorithm grows as the input size (n) grows.
 
 ```js
 for (...) {}   // O(n)
@@ -280,7 +291,7 @@ console.log(foundPost)
 Time complexity of this code is: O(n)
 
 ## Space Complexity
-Space complexity measures how the memory of an algorithm grows as the input size (n) grows.
+Space complexity measures how much the memory of an algorithm grows as the input size (n) grows.
 
 
 ```js
