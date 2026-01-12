@@ -1,16 +1,25 @@
-function twoSum(arr, target) {
-    const map = new Map()
+function binarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
 
-    for (let i = 0; i < arr.length; i++) {
-        const currentElement = arr[i]
-        const complement = target - currentElement
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
 
-        if (map.has(complement)) {
-            return [map.get(complement), i]
+        if (arr[mid] === target) {
+            return mid;
         }
-
-        map.set(currentElement, i)
+        else if (target < arr[mid]) {
+            right = mid - 1;
+        }
+        else {
+            left = mid + 1;
+        }
     }
+
+    return -1; // not found
 }
 
-console.log(twoSum([2, 11, 7, 15], 9)) // [0, 2] --> time complexity: O(n)
+const nums = [2, 4, 6, 8, 10, 12, 14];
+console.log(binarySearch(nums, 10)); // 4
+console.log(binarySearch(nums, 7));  // -1
+

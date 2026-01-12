@@ -39,8 +39,6 @@
     - [Using array:](#using-array-1)
     - [Using Linked List:](#using-linked-list-1)
 - [Part 2: Algorithms](#part-2-algorithms)
-  - [Time and Space Complexity](#time-and-space-complexity)
-  - [Searching](#searching)
   - [Sorting:](#sorting)
     - [Bubble Sort:](#bubble-sort)
       - [How bubble sort works:](#how-bubble-sort-works)
@@ -56,6 +54,9 @@
       - [Time \& Space Complexity](#time--space-complexity-1)
     - [Marge Sort:](#marge-sort)
       - [Time \& Space Complexity:](#time--space-complexity-2)
+  - [Searching:](#searching)
+    - [Binary Search:](#binary-search)
+      - [How Binary Search Works:](#how-binary-search-works)
 
 
 # Introduction: 
@@ -1370,8 +1371,7 @@ console.log(queue.size()); // 2
 ### Using Linked List:
 
 # Part 2: Algorithms
-## Time and Space Complexity
-## Searching 
+
 ## Sorting:
 Sorting means arranging elements in:
 - Ascending order → 1 2 3 4
@@ -1675,3 +1675,66 @@ console.log(mergeSort([5, 3, 8, 4]));
 | Average | O(n log n) |
 | Worst   | O(n log n) |
 | Space   | O(n)       |
+
+
+## Searching:
+
+### Binary Search:
+Binary Search is an efficient algorithm to find an element in a sorted array by repeatedly dividing the search space in half.
+
+Note: Binary Search ONLY works on sorted dat
+
+#### How Binary Search Works:
+
+Steps: 
+
+- Find the middle element:  `Math.floor((left + right) / 2);`
+- Compare with target, If:
+  - target === mid → FOUND, else:
+    - target < mid → search left half
+    - target > mid → search right half
+  - Repeat until found or range is empty
+
+Visualization:
+
+```js
+Array:   [2, 4, 6, 8, 10, 12, 14] - Target: 10
+Indexes:  0  1  2  3   4  5   6
+
+mid = (0 + 6) / 2 = 3 → arr[3] = 8
+10 > 8 → search right
+
+left = 4, right = 6
+mid = (4 + 6) / 2 = 5 → arr[5] = 12
+10 < 12 → search left
+
+left = 4, right = 4
+mid = 4 → arr[4] = 10 → FOUND 🎯
+```
+
+```js
+function binarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+
+        if (arr[mid] === target) {
+            return mid;
+        }
+        else if (target < arr[mid]) {
+            right = mid - 1;
+        }
+        else {
+            left = mid + 1;
+        }
+    }
+
+    return -1; // not found
+}
+
+const nums = [2, 4, 6, 8, 10, 12, 14];
+console.log(binarySearch(nums, 10)); // 4
+console.log(binarySearch(nums, 7));  // -1
+```
