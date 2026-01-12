@@ -1,64 +1,16 @@
-class Stack {
-    constructor() {
-        this.items = [];
-    }
+function twoSum(arr, target) {
+    const map = new Map()
 
-    push(element) {
-        this.items.push(element);
-    }
+    for (let i = 0; i < arr.length; i++) {
+        const currentElement = arr[i]
+        const complement = target - currentElement
 
-    pop() {
-        if (this.isEmpty()) return "Stack is empty";
-        return this.items.pop();
-    }
-
-    peek() {
-        if (this.isEmpty()) {
-            return "Stack is empty"
+        if (map.has(complement)) {
+            return [map.get(complement), i]
         }
 
-        return this.items[this.items.length - 1]
-    }
-
-    isEmpty() {
-        return this.items.length === 0;
-    }
-
-    size() {
-        return this.items.length;
-    }
-
-    print() {
-        console.log(this.items)
+        map.set(currentElement, i)
     }
 }
 
-function bracketChecker(str) {
-    const stack = new Stack()
-
-    const bracketsObj = {
-        ")": "(",
-        "}": "{",
-        "]": "["
-    }
-
-    for (let i = 0; i < str.length; i++) {
-        const bracket = str[i]
-
-        if (bracket === '(' || bracket === '[' || bracket === '{') {
-            stack.push(bracket)
-        }
-        else if (bracket === ')' || bracket === ']' || bracket === '}') {
-            if (stack.isEmpty() || stack.pop() !== bracketsObj[bracket]) {
-                return false
-            }
-        }
-    }
-    return stack.isEmpty()
-}
-
-
-console.log(bracketChecker("()[]{}")) // true
-console.log(bracketChecker("([{}])")) // true
-console.log(bracketChecker("(]")) // false
-console.log(bracketChecker("(()")) // false
+console.log(twoSum([2, 11, 7, 15], 9)) // [0, 2] --> time complexity: O(n)

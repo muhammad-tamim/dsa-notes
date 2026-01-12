@@ -870,7 +870,30 @@ timeForLoop: 12.169ms
 
 here, if we found the array form the cache, then the time complexity of the function is O(1)
 
+example 2: give an array and a target. find the two number index that match the target. 
 
+| Input             | Output                   |
+| ----------------- | ------------------------ |
+| [2, 11, 7, 15], 9 | [0, 2] because 2 + 9 = 9 |
+
+```js
+function twoSum(arr, target) {
+    const map = new Map()
+
+    for (let i = 0; i < arr.length; i++) {
+        const currentElement = arr[i]
+        const complement = target - currentElement
+
+        if (map.has(complement)) {
+            return [map.get(complement), i]
+        }
+
+        map.set(currentElement, i)
+    }
+}
+
+console.log(twoSum([2, 11, 7, 15], 9)) // [0, 2] --> time complexity: O(n)
+```
 
 ## Linked List: 
 A Linked List is a linear data structure where:
