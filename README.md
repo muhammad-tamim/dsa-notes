@@ -3,6 +3,7 @@
 - [Introduction:](#introduction)
   - [Classification of Data Structure:](#classification-of-data-structure)
   - [Brute Force:](#brute-force)
+  - [Pseudo Code:](#pseudo-code)
   - [Big-O Notation](#big-o-notation)
     - [Rules of Big-O Notation:](#rules-of-big-o-notation)
   - [Time Complexity](#time-complexity)
@@ -105,6 +106,32 @@ for (let i = 0; i < arr.length; i++) {
     }
 }
 ```
+
+## Pseudo Code: 
+Pseudocode is a description of what a program does, using language that is something between human language and a programming language.
+
+Example: Find The Lowest Value in an Array:
+
+- version 1: 
+
+```
+- create a lowestValue by using arr[0]
+- create a for, for off, or forEach loop to go through all the element of the input array
+- create a condition that check one element to others element to check which is smaller
+    - if if found smaller value that are more smaller than our initial lowestValue variable, then update the variable and store new lowest.
+```
+
+- version 2: 
+
+```
+Variable 'minVal' = array[0]
+For each element in the array
+    If current element < minVal
+        minVal = current element
+```
+
+we can use any of that version for pseudo code.
+
 
 ## Big-O Notation
 Big-O notation is a mathematical way to describe the worst-case time or space complexity of an algorithm as the input size grows.
