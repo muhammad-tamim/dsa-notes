@@ -1,17 +1,25 @@
-function bubbleSort(arr) {
+function selectionSort(arr) {
     for (let i = 0; i < arr.length - 1; i++) {
-        let isSwapped = false
-        for (let j = 0; j < arr.length - 1 - i; j++) {
-            if (arr[j] > arr[j + 1]) {
-                let temp = arr[j]
-                arr[j] = arr[j + 1]
-                arr[j + 1] = temp
-                isSwapped = true
+
+        let minIdx = i
+
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j
             }
-            if (!isSwapped) break
         }
+
+        let temp = arr[i]
+        arr[i] = arr[minIdx]
+        arr[minIdx] = temp
     }
+
     console.log(arr)
 }
 
-bubbleSort([7, 3, 9, 12, 11]) // [ 3, 7, 9, 11, 12 ]
+selectionSort([7, 12, 9, 11, 3]) // [ 3, 7, 9, 11, 12 ]
+
+/*
+Time complexity: O(n^2)
+Space complexity: O(1)
+*/

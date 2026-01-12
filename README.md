@@ -45,8 +45,6 @@
   - [Sorting:](#sorting)
     - [Bubble Sort:](#bubble-sort)
     - [Selection Sort:](#selection-sort)
-      - [How selection sort works:](#how-selection-sort-works)
-      - [Time \& Space Complexity (Bubble Sort)](#time--space-complexity-bubble-sort)
     - [Insertion Sort:](#insertion-sort)
       - [How insertion sort works:](#how-insertion-sort-works)
       - [Time \& Space Complexity:](#time--space-complexity)
@@ -1483,12 +1481,10 @@ bubbleSort([7, 12, 9, 11, 3]) // [ 3, 7, 9, 11, 12 ]
  
 ![alt text](./assets/gifs/part-2-algorithms/sorting/bubble-sort/bubble-sort-2.gif)
 
-![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort-1.png)
-![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort-2.png)
-![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort-3.png)
-![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort-4.png)
-
-[To see the full draw](./assets/draw/part-2-algorithms/bubble-sort/bubble-sort.excalidraw)
+![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort/bubble-sort-1.png)
+![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort/bubble-sort-2.png)
+![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort/bubble-sort-3.png)
+![alt text](./assets/images/part-2-algorithms/sorting/bubble-sort/bubble-sort-4.png)
 
 
 **Note:** The Bubble Sort algorithm can be improved a little bit more. Imagine the array will be sorted after the first run, then the later operation are waste of time.
@@ -1504,8 +1500,8 @@ function bubbleSort(arr) {
                 arr[j + 1] = temp
                 isSwapped = true
             }
-            if (!isSwapped) break
         }
+            if (!isSwapped) break
     }
     console.log(arr)
 }
@@ -1513,77 +1509,50 @@ function bubbleSort(arr) {
 bubbleSort([7, 3, 9, 12, 11]) // [ 3, 7, 9, 11, 12 ]
 ```
 
-### Selection Sort:
-Selection sort finds the smallest element and places it at the correct position.
+### Selection Sort: 
+The Selection Sort algorithm finds the lowest value in an array and moves it to the front of the array.
 
-```js 
-let arr = [5, 1, 4, 2]
+![image](./assets/gifs/part-2-algorithms/sorting/selection-sort/selection-sort-1.gif)
 
-for (let i = 0; i < arr.length - 1; i++) {
-    let minIndex = i;
+**How it works:**
+- Go through the array to find the lowest value.
+- Move the lowest value to the front of the unsorted part of the array.
+- Go through the array again as many times as there are values in the array.
 
-    for (let j = i + 1; j < arr.length; j++) {
-        if (arr[j] < arr[minIndex]) {
-            minIndex = j;
+**Implementation:**
+
+```js
+function selectionSort(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+
+        let minIdx = i
+
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j
+            }
         }
+
+        let temp = arr[i]
+        arr[i] = arr[minIdx]
+        arr[minIdx] = temp
     }
 
-    // swap
-    let temp = arr[i];
-    arr[i] = arr[minIndex];
-    arr[minIndex] = temp;
+    console.log(arr)
 }
 
-console.log(arr); // [1, 2, 4, 5]
+selectionSort([7, 12, 9, 11, 3]) // [ 3, 7, 9, 11, 12 ]
 ```
 
-#### How selection sort works: 
+- Time complexity: O(n^2)
+- Space complexity: O(1)
 
-`let arr = [5, 1, 4, 2]`
+![image](./assets/gifs/part-2-algorithms/sorting/selection-sort/selection-sort-2.gif)
 
-Pass 1: i = 0; 0 < 3; minIndex = 0:
-
-1st smallest number 1 will move to the first index
-
-| j   | condition    | Compare       | minIndex |
-| --- | ------------ | ------------- | -------- |
-| 1   | 1 < 4 = true | 1 < 5 = true  | 1        |
-| 2   | 2 < 4 = true | 4 < 1 = false |          |
-| 3   | 3 < 4 = true | 2 < 1 = false |          |
-
-Swap: 
-[5, 1, 4, 2] --> 5 swap 1 --> [1, 5, 4, 2]
-
-Pass 2: i = 1; 1 < 3; minIndex = 1:
-
-2nd smallest number 2 will move to second index
-
-| j   | condition    | Compare      | minIndex |
-| --- | ------------ | ------------ | -------- |
-| 2   | 2 < 4 = true | 4 < 5 = true | 2        |
-| 3   | 3 < 4 = true | 2 < 4 = true | 3        |
-
-Swap: 
-[1, 5, 4, 2] --> 5 swap 2 --> [1, 2, 4, 5] (Sorted ascending order)
-
-pass 3: i = 2; 2 < 3; minIndex = 2: 
-
-
-| j   | condition    | Compare       | minIndex |
-| --- | ------------ | ------------- | -------- |
-| 3   | 3 < 4 = true | 5 < 4 = false |          |
-
-Swap: 
-[1, 2, 4, 5] --> 4 swap 4 -->[1, 2, 4, 5] 
-
-#### Time & Space Complexity (Bubble Sort)
-
-| Case    | Time  |
-| ------- | ----- |
-| Best    | O(n²) |
-| Average | O(n²) |
-| Worst   | O(n²) |
-| Space   | O(1)  |
+![image](./assets/images/part-2-algorithms/sorting/selection-sort/selection-sort-1.png)
+![image](./assets/images/part-2-algorithms/sorting/selection-sort/selection-sort-2.png)
+![image](./assets/images/part-2-algorithms/sorting/selection-sort/selection-sort-3.png)
+![image](./assets/images/part-2-algorithms/sorting/selection-sort/selection-sort-4.png)
 
 ### Insertion Sort:
 Build a sorted part of the array one element at a time. Take the next element and insert it in its correct position in the already sorted part.
