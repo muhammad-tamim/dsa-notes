@@ -1,130 +1,54 @@
-class Node {
-    constructor(value) {
-        this.value = value
-        this.next = null
+const cache = new Map();
+
+function expensiveCalculation(arr) {
+    console.log("----------")
+    const key = arr;
+
+    if (cache.has(key)) {
+        console.time("timeForCache")
+
+        console.timeEnd("timeForCache")
+
+        return cache.get(key);
     }
+
+    console.time("timeForLoop")
+
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+
+    console.timeEnd("timeForLoop")
+
+    cache.set(key, sum);
+    return sum;
 }
 
-class LinkedList {
-    constructor() {
-        this.head = null
-        this.tail = null
-        this.length = 0
-    }
 
-    append(value) {
-        const newNode = new Node(value)
+const inputArr = []
+const inputArr2 = []
 
-        if (this.head === null) {
-            this.head = newNode
-            this.tail = newNode
-        }
-        else {
-            this.tail.next = newNode
-            this.tail = newNode
-        }
-        this.length++
-        return this
-    }
-
-    prepend(value) {
-        const newNode = new Node(value)
-
-        if (this.head === null) {
-            this.head = newNode
-            this.tail = newNode
-        }
-        else {
-            newNode.next = this.head
-            this.head = newNode
-        }
-        this.length++
-        return this
-    }
-
-    insert(index, value) {
-        if (index < 0 || index > this.length) {
-            console.error("index not found")
-            return undefined
-        }
-
-        if (index === 0) {
-            return this.prepend(value)
-        }
-        if (index === this.length) {
-            return this.append(value)
-        }
-
-
-        const leadingNode = this._traverseToIndex(index - 1)
-        const holdingNode = leadingNode.next
-
-        const newNode = new Node(value)
-
-        leadingNode.next = newNode
-        newNode.next = holdingNode
-
-        this.length++
-    }
-
-    _traverseToIndex(index) {
-        let count = 0
-        let currentNode = this.head
-
-        while (count !== index) {
-            currentNode = currentNode.next
-            count++
-        }
-        return currentNode
-    }
-
-    remove(index) {
-
-        if (index === 0) {
-            const removedItem = this.head.next
-
-            this.head = this.head.next
-
-            if (this.length === 1) {
-                this.tail = null
-            }
-
-            this.length--;
-            return removedItem
-        }
-
-        const leadingNode = this._traverseToIndex(index - 1)
-        const nodeToRemove = leadingNode.next
-
-        leadingNode.next = nodeToRemove.next
-
-        if (leadingNode.next === null) {
-            this.tail = leadingNode
-        }
-
-        return nodeToRemove.value
-    }
-
-    print() {
-        let currentNode = this.head
-        while (currentNode !== null) {
-            console.log(currentNode.value)
-            currentNode = currentNode.next
-        }
-    }
+for (let i = 0; i < 10000000; i++) {
+    inputArr.push(i)
+}
+for (let i = 1; i < 10000000; i++) {
+    inputArr2.push(i)
 }
 
-const linkedList = new LinkedList()
+console.log(expensiveCalculation(inputArr))
+console.log(expensiveCalculation(inputArr))
 
-linkedList.append(50).append(60).append(70)
+console.log(expensiveCalculation(inputArr2))
 
-linkedList.prepend(30).prepend(20).prepend(10)
-
-linkedList.insert(3, 40)
-
-linkedList.print()
-
-linkedList.remove(2)
-
-console.log("------------")
-linkedList.print()
+/*
+----------
+timeForLoop: 16.331ms
+49999995000000
+----------
+timeForCache: 0.007ms
+49999995000000
+----------
+timeForLoop: 12.169ms
+49999995000000
+*/

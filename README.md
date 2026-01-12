@@ -21,7 +21,7 @@
         - [properties:](#properties)
       - [Logic methods:](#logic-methods)
       - [Converting array to set and set to array:](#converting-array-to-set-and-set-to-array)
-      - [Example:](#example)
+      - [Examples:](#examples)
     - [map](#map)
       - [Difference between Objects and Maps](#difference-between-objects-and-maps)
       - [How to Create a Map:](#how-to-create-a-map)
@@ -29,6 +29,7 @@
       - [Common map methods and properties:](#common-map-methods-and-properties)
         - [Methods:](#methods-1)
         - [Properties:](#properties-1)
+      - [Examples:](#examples-1)
   - [Linked List:](#linked-list)
   - [Stack:](#stack)
     - [Using Array:](#using-array)
@@ -495,7 +496,7 @@ const uniqueArray = [...uniqueNums];
 console.log(uniqueArray); // [1, 2, 3, 4]
 ```
 
-#### Example: 
+#### Examples: 
 
 Example 1: remove all duplicates array element: 
 
@@ -517,7 +518,7 @@ function removeDupArr(arr) {
 Time Complexity: O(n^2)
 
 - With Set: 
-- 
+
 ```js
 function removeDupArr(arr) {
     const set = new Set(arr)
@@ -526,6 +527,77 @@ function removeDupArr(arr) {
 }
 ```
 Time Complexity: O(n)
+
+Example 2: find common users that have both array
+
+- without set:
+
+```js
+// input
+const userCount = 50000;
+let usersA = []
+let usersB = []
+
+const createUsers = id => ({ id: `user_${id}`, name: `user ${id}` })
+
+for (let i = 0; i < userCount; i++) {
+    usersA.push(createUsers(i))
+    usersB.push(createUsers(i + 25000))
+}
+
+
+// Solutions
+
+let commonUsers = []
+
+console.time("totalTime")
+
+usersA.forEach(userA => {
+    usersB.forEach(userB => {
+        if (userA.id === userB.id) {
+            commonUsers.push(userA)
+        }
+    })
+})
+
+console.log(commonUsers.length)
+console.timeEnd("totalTime") // O(n²) = totalTime: 23.608s
+```
+
+- with set: 
+
+```js
+// input
+const userCount = 50000;
+let usersA = []
+let usersB = []
+
+const createUsers = id => ({ id: `user_${id}`, name: `user ${id}` })
+
+for (let i = 0; i < userCount; i++) {
+    usersA.push(createUsers(i))
+    usersB.push(createUsers(i + 25000))
+}
+
+
+// Solutions
+let commonUsers = []
+
+console.time("totalTime")
+
+const idListsA = new Set(usersA.map(user => user.id))
+
+usersB.forEach(userB => {
+    if (idListsA.has(userB.id)) {
+        commonUsers.push(userB)
+    }
+})
+
+console.log(commonUsers)
+console.log(commonUsers.length)
+
+console.timeEnd("totalTime") // O(n) = totalTime: 26.95ms
+```
 
 ### map
 A Map is a collection of key-value pairs, where keys can be any type (unlike objects which convert keys to strings). 
@@ -733,6 +805,70 @@ fruits.set("oranges", 600);
 
 console.log(fruits.size) // 3
 ```
+
+#### Examples: 
+
+example 1: Implement a simple in-memory cache for an expensive function, so if the function call again the function result returned form the cache for better performance.
+
+```js
+const cache = new Map();
+
+function expensiveCalculation(arr) {
+    console.log("----------")
+    const key = arr;
+
+    if (cache.has(key)) {
+        console.time("timeForCache")
+
+        console.timeEnd("timeForCache")
+
+        return cache.get(key);
+    }
+
+    console.time("timeForLoop")
+
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+
+    console.timeEnd("timeForLoop")
+
+    cache.set(key, sum);
+    return sum;
+}
+
+
+const inputArr = []
+const inputArr2 = []
+
+for (let i = 0; i < 10000000; i++) {
+    inputArr.push(i)
+}
+for (let i = 1; i < 10000000; i++) {
+    inputArr2.push(i)
+}
+
+console.log(expensiveCalculation(inputArr))
+console.log(expensiveCalculation(inputArr))
+
+console.log(expensiveCalculation(inputArr2))
+
+/*
+----------
+timeForLoop: 16.331ms
+49999995000000
+----------
+timeForCache: 0.007ms
+49999995000000
+----------
+timeForLoop: 12.169ms
+49999995000000
+*/
+```
+
+here, if we found the array form the cache, then the time complexity of the function is O(1)
+
 
 
 ## Linked List: 
