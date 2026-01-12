@@ -1,54 +1,64 @@
-const cache = new Map();
-
-function expensiveCalculation(arr) {
-    console.log("----------")
-    const key = arr;
-
-    if (cache.has(key)) {
-        console.time("timeForCache")
-
-        console.timeEnd("timeForCache")
-
-        return cache.get(key);
+class Stack {
+    constructor() {
+        this.items = [];
     }
 
-    console.time("timeForLoop")
-
-    let sum = 0;
-    for (let i = 0; i < arr.length; i++) {
-        sum += arr[i];
+    push(element) {
+        this.items.push(element);
     }
 
-    console.timeEnd("timeForLoop")
+    pop() {
+        if (this.isEmpty()) return "Stack is empty";
+        return this.items.pop();
+    }
 
-    cache.set(key, sum);
-    return sum;
+    peek() {
+        if (this.isEmpty()) {
+            return "Stack is empty"
+        }
+
+        return this.items[this.items.length - 1]
+    }
+
+    isEmpty() {
+        return this.items.length === 0;
+    }
+
+    size() {
+        return this.items.length;
+    }
+
+    print() {
+        console.log(this.items)
+    }
+}
+
+function bracketChecker(str) {
+    const stack = new Stack()
+
+    const bracketsObj = {
+        ")": "(",
+        "}": "{",
+        "]": "["
+    }
+
+    for (let i = 0; i < str.length; i++) {
+        const bracket = str[i]
+
+        if (bracket === '(' || bracket === '[' || bracket === '{') {
+            stack.push(bracket)
+        }
+        else if (bracket === ')' || bracket === ']' || bracket === '}') {
+            if (stack.isEmpty() || stack.pop() !== bracketsObj[bracket]) {
+                return false
+            }
+        }
+    }
+    return stack.isEmpty()
 }
 
 
-const inputArr = []
-const inputArr2 = []
-
-for (let i = 0; i < 10000000; i++) {
-    inputArr.push(i)
-}
-for (let i = 1; i < 10000000; i++) {
-    inputArr2.push(i)
-}
-
-console.log(expensiveCalculation(inputArr))
-console.log(expensiveCalculation(inputArr))
-
-console.log(expensiveCalculation(inputArr2))
-
-/*
-----------
-timeForLoop: 16.331ms
-49999995000000
-----------
-timeForCache: 0.007ms
-49999995000000
-----------
-timeForLoop: 12.169ms
-49999995000000
-*/
+console.log(bracketChecker("()[]{}")) // true
+console.log(bracketChecker("([{}])")) // true
+console.log(bracketChecker("(]")) // false
+console.log(bracketChecker("(()")) // false

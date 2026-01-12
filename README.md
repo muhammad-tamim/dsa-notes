@@ -34,6 +34,7 @@
   - [Stack:](#stack)
     - [Using Array:](#using-array)
     - [Using Linked List:](#using-linked-list)
+    - [Examples:](#examples-2)
   - [Queue:](#queue)
     - [Using array:](#using-array-1)
     - [Using Linked List:](#using-linked-list-1)
@@ -1194,6 +1195,81 @@ console.log(stack.isEmpty()) // false
 console.log(stack.size()); // 2
 ```
 ### Using Linked List: 
+
+### Examples: 
+
+- Example 1: 
+
+Given a string that contains brackets, determine if the brackets are correct or not. bracket are valid if: 
+  - A bracket must be closed with same time of bracket
+  - A bracket must be closed with correct order
+  
+```js
+class Stack {
+    constructor() {
+        this.items = [];
+    }
+
+    push(element) {
+        this.items.push(element);
+    }
+
+    pop() {
+        if (this.isEmpty()) return "Stack is empty";
+        return this.items.pop();
+    }
+
+    peek() {
+        if (this.isEmpty()) {
+            return "Stack is empty"
+        }
+
+        return this.items[this.items.length - 1]
+    }
+
+    isEmpty() {
+        return this.items.length === 0;
+    }
+
+    size() {
+        return this.items.length;
+    }
+
+    print() {
+        console.log(this.items)
+    }
+}
+
+function bracketChecker(str) {
+    const stack = new Stack()
+
+    const bracketsObj = {
+        ")": "(",
+        "}": "{",
+        "]": "["
+    }
+
+    for (let i = 0; i < str.length; i++) {
+        const bracket = str[i]
+
+        if (bracket === '(' || bracket === '[' || bracket === '{') {
+            stack.push(bracket)
+        }
+        else if (bracket === ')' || bracket === ']' || bracket === '}') {
+            if (stack.isEmpty() || stack.pop() !== bracketsObj[bracket]) {
+                return false
+            }
+        }
+    }
+    return stack.isEmpty()
+}
+
+
+console.log(bracketChecker("()[]{}")) // true
+console.log(bracketChecker("([{}])")) // true
+console.log(bracketChecker("(]")) // false
+console.log(bracketChecker("(()")) // false
+```
 
 ## Queue:
 A Queue is a linear data structure that follows: FIFO – First In, First Out
