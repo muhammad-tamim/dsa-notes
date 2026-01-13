@@ -1,7 +1,6 @@
 <h1 align="center">Data Structure and Algorithms Notes</h1>
 
 - [Introduction:](#introduction)
-  - [Classification of Data Structure:](#classification-of-data-structure)
   - [Brute Force:](#brute-force)
   - [Pseudo Code:](#pseudo-code)
   - [Big-O Notation](#big-o-notation)
@@ -15,8 +14,8 @@
 - [Part 1: Data Structures](#part-1-data-structures)
   - [Array](#array)
   - [String](#string)
-  - [Hash Table](#hash-table)
-    - [set:](#set)
+  - [Object:](#object)
+  - [set:](#set)
       - [How to create a set:](#how-to-create-a-set)
       - [Iterating:](#iterating)
       - [Common set methods and properties:](#common-set-methods-and-properties)
@@ -25,7 +24,7 @@
       - [Logic methods:](#logic-methods)
       - [Converting array to set and set to array:](#converting-array-to-set-and-set-to-array)
       - [Examples:](#examples)
-    - [map](#map)
+  - [map](#map)
       - [Difference between Objects and Maps](#difference-between-objects-and-maps)
       - [How to Create a Map:](#how-to-create-a-map)
       - [Iterating:](#iterating-1)
@@ -41,18 +40,19 @@
   - [Queue:](#queue)
     - [Using array:](#using-array-1)
     - [Using Linked List:](#using-linked-list-1)
+  - [Hash Table:](#hash-table)
+  - [Trees:](#trees)
+  - [Graphs:](#graphs)
 - [Part 2: Algorithms](#part-2-algorithms)
   - [Sorting:](#sorting)
     - [Bubble Sort:](#bubble-sort)
     - [Selection Sort:](#selection-sort)
     - [Insertion Sort:](#insertion-sort)
-      - [How insertion sort works:](#how-insertion-sort-works)
-      - [Time \& Space Complexity:](#time--space-complexity)
     - [Quick Sort:](#quick-sort)
-      - [How insertion sort works:](#how-insertion-sort-works-1)
-      - [Time \& Space Complexity](#time--space-complexity-1)
+      - [How insertion sort works:](#how-insertion-sort-works)
+      - [Time \& Space Complexity](#time--space-complexity)
     - [Marge Sort:](#marge-sort)
-      - [Time \& Space Complexity:](#time--space-complexity-2)
+      - [Time \& Space Complexity:](#time--space-complexity-1)
   - [Searching:](#searching)
     - [Binary Search:](#binary-search)
       - [How Binary Search Works:](#how-binary-search-works)
@@ -62,12 +62,6 @@
 DSA stands for Data Structures and Algorithms: 
 - Data Structures is about how data can be stored in different structures.
 - Algorithms is about how to solve different problems efficiently by flowing step by step instructions for each, using data structures.
-
-## Classification of Data Structure: 
-- Linear: Arranged sequentially means one element can only connected to its next element.
-  - array, linkedList, stack, queue, dequeue
-- Non-linear: Not arranged sequentially means one element can be connected to multiple elements.
-  - tree, binary tree, binary search tree, heap, graph
 
 ## Brute Force: 
 Brute force is a simple, initial and straight forward approach to solving a problem by trying all possible solutions without using any optimized algorithms. 
@@ -380,9 +374,11 @@ https://github.com/muhammad-tamim/javascript-notes?tab=readme-ov-file#array
 
 https://github.com/muhammad-tamim/JavaScript-notes?tab=readme-ov-file#string
 
-## Hash Table
+## Object: 
 
-### set:
+https://github.com/muhammad-tamim/JavaScript-notes?tab=readme-ov-file#objects
+
+## set:
 A Set is a collection of unique values. It automatically removes duplicates and can store values of any type (primitive or object).
 
 #### How to create a set:
@@ -670,7 +666,7 @@ console.log(commonUsers.length)
 console.timeEnd("totalTime") // O(n) = totalTime: 26.95ms
 ```
 
-### map
+## map
 A Map is a collection of key-value pairs, where keys can be any type (unlike objects which convert keys to strings). 
 
 #### Difference between Objects and Maps
@@ -1439,6 +1435,10 @@ console.log(queue.size()); // 2
 
 ### Using Linked List:
 
+## Hash Table: 
+## Trees: 
+## Graphs: 
+
 # Part 2: Algorithms
 
 ## Sorting:
@@ -1554,88 +1554,46 @@ selectionSort([7, 12, 9, 11, 3]) // [ 3, 7, 9, 11, 12 ]
 ![image](./assets/images/part-2-algorithms/sorting/selection-sort/selection-sort-3.png)
 ![image](./assets/images/part-2-algorithms/sorting/selection-sort/selection-sort-4.png)
 
-### Insertion Sort:
-Build a sorted part of the array one element at a time. Take the next element and insert it in its correct position in the already sorted part.
+### Insertion Sort: 
+The Insertion Sort algorithm uses one part of the array to hold the sorted values, and the other part of the array to hold values that are not sorted yet.
+
+![image](./assets/gifs/part-2-algorithms/sorting/insertion-sort/insertion-sort-1.gif)
+
+**How it works:**
+- Take the first value from the unsorted part of the array.
+- Move the value into the correct place in the sorted part of the array.
+- Go through the unsorted part of the array again as many times as there are values.
+
+**Implementation:**
 
 ```js
-let arr = [5, 1, 4, 2]
+function insertionSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        let key = arr[i];
+        let j = i - 1
 
-for (let i = 1; i < arr.length; i++) {
-    let key = arr[i];
-    let j = i - 1;
- 
-    // Shift elements greater than key to the right
-    while (j >= 0 && arr[j] > key) {
-        arr[j + 1] = arr[j];
-        j--;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j]
+            j--
+        }
+        arr[j + 1] = key
     }
 
-    // Insert key in correct position
-    arr[j + 1] = key;
+    console.log(arr)
 }
 
-console.log(arr) // 1, 2, 4, 5
-```
- 
-#### How insertion sort works: 
-
-`let arr = [5, 1, 4, 2]`
-
-**Pass 1:** i = 1; i < 4: 
-
-```js
-key = arr[i] = arr[1] = 1
-j = i - 1 = 0
+insertionSort([7, 12, 9, 11, 3]) // [ 3, 7, 9, 11, 12 ]
 ```
 
-| j   | j >= 0 && arr[j] > key  | ar[j + 1] = arr[j] | Array State  | j-- |
-| --- | ----------------------- | ------------------ | ------------ | --- |
-| 0   | 0 >= 0 && 5 > 1 == true | arr[1] = arr[0]    | [5, 5, 4, 2] | -1  |
+- Time complexity: O(n^2)
+- Space complexity: O(1)
 
-```js
-arr[j + 1] = key --> arr[0] = 1 -->  `[1, 5, 4, 2]`
-```
+![image](./assets/gifs/part-2-algorithms/sorting/insertion-sort/insertion-sort-2.gif)
 
-**Pass 2:** i++ --> i = 2; i < 4: 
-
-```js
-key = arr[i] = arr[2] = 4
-j = i - 1 = 1
-```
-
-| j   | j >= 0 && arr[j] > key  | ar[j + 1] = arr[j] | Array State  | j-- |
-| --- | ----------------------- | ------------------ | ------------ | --- |
-| 1   | 1 >= 0 && 5 > 4 → true  | arr[2] = arr[1]    | [1, 5, 5, 2] | 0   |
-| 0   | 0 >= 0 && 1 > 4 → false |                    |              |     |
-
-```js
-arr[j + 1] = key --> arr[1] = 4 --> `[1, 4, 5, 2]`
-```
-
-**Pass 3:** i++ --> i = 3; i < 4: 
-
-```js
-key = arr[i] = arr[3] = 2
-j = i - 1 = 2
-```
-
-| j   | j >= 0 && arr[j] > key  | ar[j + 1] = arr[j] | Array State  | j-- |
-| --- | ----------------------- | ------------------ | ------------ | --- |
-| 2   | 2 >= 0 && 5 > 2 → true  | arr[3] = arr[2]    | [1, 4, 5, 5] | 1   |
-| 1   | 1 >= 0 && 4 > 2 → true  | arr[2] = arr[1]    | [1, 4, 4, 5] | 0   |
-| 0   | 0 >= 0 && 1 > 2 → false |                    |              |     |
-
-```js
-arr[j + 1] = key --> arr[1] = 2 --> `[1, 2, 4, 5]`
-```
-
-#### Time & Space Complexity:
-
-| Case                   | Time  | Space |
-| ---------------------- | ----- | ----- |
-| Best (already sorted)  | O(n)  | O(1)  |
-| Average                | O(n²) | O(1)  |
-| Worst (reverse sorted) | O(n²) | O(1)  |
+![image](./assets/images/part-2-algorithms/sorting/insertion-sort/insertion-sort-1.png)
+![image](./assets/images/part-2-algorithms/sorting/insertion-sort/insertion-sort-2.png)
+![image](./assets/images/part-2-algorithms/sorting/insertion-sort/insertion-sort-3.png)
+![image](./assets/images/part-2-algorithms/sorting/insertion-sort/insertion-sort-4.png)
 
 
 ### Quick Sort:
