@@ -54,6 +54,7 @@
     - [Marge Sort:](#marge-sort)
       - [Time \& Space Complexity:](#time--space-complexity-1)
   - [Searching:](#searching)
+    - [Linear Search(Brute Force):](#linear-searchbrute-force)
     - [Binary Search:](#binary-search)
       - [How Binary Search Works:](#how-binary-search-works)
 
@@ -1681,11 +1682,34 @@ console.log(mergeSort([5, 3, 8, 4]));
 
 
 ## Searching:
+A searching algorithm is a way to find a specific value inside an array.
+
+### Linear Search(Brute Force):
+Go through each element one by one until you find the target:
+- if found the target return the index 
+- if not return -1.  
+
+```js
+function linearSearch(arr, target) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === target) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+console.log(linearSearch([3, 7, 2, 9, 5], 9)) // 3
+console.log(linearSearch([3, 7, 2, 9, 5], 20)) // -1
+```
+
+- Time complexity: O(n)
+- Space complexity: O(1)
 
 ### Binary Search:
 Binary Search is an efficient algorithm to find an element in a sorted array by repeatedly dividing the search space in half.
 
-Note: Binary Search ONLY works on sorted dat
+Note: Binary Search ONLY works on sorted data
 
 #### How Binary Search Works:
 

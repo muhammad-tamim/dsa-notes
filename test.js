@@ -1,16 +1,11 @@
-function insertionSort(arr) {
-    for (let i = 1; i < arr.length; i++) {
-        let key = arr[i];
-        let j = i - 1
-
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j]
-            j--
+function linearSearch(arr, target) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === target) {
+            return i;
         }
-        arr[j + 1] = key
     }
-
-    console.log(arr)
+    return -1;
 }
 
-insertionSort([7, 12, 9, 11, 3]) // [ 3, 7, 9, 11, 12 ]
+console.log(linearSearch([3, 7, 2, 9, 5], 9)) // 3
+console.log(linearSearch([3, 7, 2, 9, 5], 20)) // -1
