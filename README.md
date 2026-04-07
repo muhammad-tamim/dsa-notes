@@ -12,9 +12,8 @@
     - [Lookup Table:](#lookup-table)
   - [Space Complexity](#space-complexity)
 - [Part 1: Data Structures](#part-1-data-structures)
-  - [Array](#array)
-  - [String](#string)
   - [Object:](#object)
+  - [Array](#array)
   - [set:](#set)
       - [How to create a set:](#how-to-create-a-set)
       - [Iterating:](#iterating)
@@ -34,12 +33,7 @@
       - [Examples:](#examples-1)
   - [Linked List:](#linked-list)
   - [Stack:](#stack)
-    - [Using Array:](#using-array)
-    - [Using Linked List:](#using-linked-list)
-    - [Examples:](#examples-2)
   - [Queue:](#queue)
-    - [Using array:](#using-array-1)
-    - [Using Linked List:](#using-linked-list-1)
   - [Hash Table:](#hash-table)
   - [Trees:](#trees)
   - [Graphs:](#graphs)
@@ -49,14 +43,10 @@
     - [Selection Sort:](#selection-sort)
     - [Insertion Sort:](#insertion-sort)
     - [Quick Sort:](#quick-sort)
-      - [How insertion sort works:](#how-insertion-sort-works)
-      - [Time \& Space Complexity](#time--space-complexity)
     - [Marge Sort:](#marge-sort)
-      - [Time \& Space Complexity:](#time--space-complexity-1)
   - [Searching:](#searching)
     - [Linear Search(Brute Force):](#linear-searchbrute-force)
     - [Binary Search:](#binary-search)
-      - [How Binary Search Works:](#how-binary-search-works)
 
 
 # Introduction: 
@@ -367,17 +357,13 @@ Space Complexity: O(n)
 
 # Part 1: Data Structures
 
-## Array 
+## Object: 
+https://github.com/muhammad-tamim/JavaScript-notes?tab=readme-ov-file#objects
 
+## Array 
 https://github.com/muhammad-tamim/javascript-notes?tab=readme-ov-file#array
 
-## String 
 
-https://github.com/muhammad-tamim/JavaScript-notes?tab=readme-ov-file#string
-
-## Object: 
-
-https://github.com/muhammad-tamim/JavaScript-notes?tab=readme-ov-file#objects
 
 ## set:
 A Set is a collection of unique values. It automatically removes duplicates and can store values of any type (primitive or object).
@@ -1231,7 +1217,6 @@ A Stack is a linear data structure that follows the rule: LIFO – Last In, Firs
 | `isEmpty` | Check if empty     |
 | `size`    | Number of elements |
 
-### Using Array:
 
 ```js
 class Stack {
@@ -1284,11 +1269,8 @@ console.log(stack.peek()); // 10
 console.log(stack.isEmpty()) // false
 console.log(stack.size()); // 2
 ```
-### Using Linked List: 
 
-### Examples: 
-
-- Example 1: 
+- Example: 
 
 Given a string that contains brackets, determine if the brackets are correct or not. bracket are valid if: 
   - A bracket must be closed with same time of bracket
@@ -1380,7 +1362,6 @@ A Queue is a linear data structure that follows: FIFO – First In, First Out
 | `isEmpty` | Check if queue empty      |
 | `size`    | Number of elements        |
 
-### Using array: 
 
 ```js
 class Queue {
@@ -1434,10 +1415,11 @@ console.log(queue.isEmpty()) // false
 console.log(queue.size()); // 2
 ```
 
-### Using Linked List:
 
 ## Hash Table: 
+
 ## Trees: 
+
 ## Graphs: 
 
 # Part 2: Algorithms
@@ -1453,6 +1435,7 @@ Bubble Sort is an algorithm that sorts an array from the lowest value to the hig
 ![alt text](./assets/gifs/part-2-algorithms/sorting/bubble-sort/bubble-sort-1.gif)
 
 **How it works:**
+
 - Go through the array, one value at a time.
 - For each value, compare the value with the next value.
 - If the value is higher than the next one, swap the values so that the highest value comes last.
@@ -1600,6 +1583,10 @@ insertionSort([7, 12, 9, 11, 3]) // [ 3, 7, 9, 11, 12 ]
 ### Quick Sort:
 Pick a pivot element and place it in its correct position. All smaller elements go left, larger elements go right. Repeat this process recursively.
 
+**How it works:**
+
+**Implementation:**
+
 ```js
 function quickSort(arr) {
     if (arr.length <= 1) {
@@ -1624,8 +1611,6 @@ function quickSort(arr) {
 console.log(quickSort([5, 3, 8, 4, 2]));
 ```
 
-#### How insertion sort works:
-#### Time & Space Complexity
 | Case    | Time       |
 | ------- | ---------- |
 | Best    | O(n log n) |
@@ -1638,13 +1623,16 @@ Worst case happens when array is already sorted and bad pivot is chosen.
 ### Marge Sort: 
 Split the array into halves until each part has one element, then merge them back in sorted order.
 
+**How it works:** 
+
+**Implementation:**
+
 ```js
 function mergeSort(arr) {
-    if (arr.length <= 1) {
-        return arr;
-    }
+    if (arr.length <= 1) return arr;
 
     const mid = Math.floor(arr.length / 2);
+
     const left = mergeSort(arr.slice(0, mid));
     const right = mergeSort(arr.slice(mid));
 
@@ -1657,21 +1645,17 @@ function merge(left, right) {
 
     while (i < left.length && j < right.length) {
         if (left[i] < right[j]) {
-            result.push(left[i]);
-            i++;
+            result.push(left[i++]);
         } else {
-            result.push(right[j]);
-            j++;
+            result.push(right[j++]);
         }
     }
 
-    return result.concat(left.slice(i)).concat(right.slice(j));
+    return [...result, ...left.slice(i), ...right.slice(j)];
 }
 
-console.log(mergeSort([5, 3, 8, 4]));
+console.log(mergeSort([5, 3, 8, 4])); // [ 3, 4, 5, 8 ]
 ```
-
-#### Time & Space Complexity:
 
 | Case    | Time       |
 | ------- | ---------- |
@@ -1711,14 +1695,13 @@ Binary Search is an efficient algorithm to find an element in a sorted array by 
 
 Note: Binary Search ONLY works on sorted data
 
-#### How Binary Search Works:
-
 Steps: 
+- Set left = 0, right = arr.length - 1
 
-- Find the middle element:  `Math.floor((left + right) / 2);`
-- Compare with target, If:
-  - target === mid → FOUND, else:
-    - target < mid → search left half
+- While left ≤ right then Compare with target, If:
+  - Find the middle idx:  `Math.floor((left + right) / 2);`
+  - target === mid → return found index, else:
+    - target < mid → search left half,
     - target > mid → search right half
   - Repeat until found or range is empty
 
@@ -1745,23 +1728,46 @@ function binarySearch(arr, target) {
     let right = arr.length - 1;
 
     while (left <= right) {
-        let mid = Math.floor((left + right) / 2);
+        const mid = Math.floor((left + right) / 2);
 
-        if (arr[mid] === target) {
-            return mid;
-        }
-        else if (target < arr[mid]) {
-            right = mid - 1;
-        }
-        else {
+        if (arr[mid] === target) return mid;
+
+        if (arr[mid] < target) {
             left = mid + 1;
+        } else {
+            right = mid - 1;
         }
     }
 
-    return -1; // not found
+    return -1;
 }
 
-const nums = [2, 4, 6, 8, 10, 12, 14];
-console.log(binarySearch(nums, 10)); // 4
-console.log(binarySearch(nums, 7));  // -1
+const arr = [2, 4, 6, 8, 10, 12, 14];
+console.log(binarySearch(arr, 10)); // 4
+console.log(binarySearch(arr, 7));  // -1
 ```
+
+```js
+// Recursive Version
+
+function binarySearchRecursive(arr, target, left = 0, right = arr.length - 1) {
+    if (left > right) return -1;
+
+    const mid = Math.floor((left + right) / 2);
+
+    if (arr[mid] === target) return mid;
+
+    if (arr[mid] < target) {
+        return binarySearchRecursive(arr, target, mid + 1, right);
+    } else {
+        return binarySearchRecursive(arr, target, left, mid - 1);
+    }
+}
+
+const arr = [2, 4, 6, 8, 10, 12, 14];
+console.log(binarySearchRecursive(arr, 10)); // 4
+console.log(binarySearchRecursive(arr, 7));  // -1
+```
+
+- Time complexity: O(log n)
+- Space complexity: O(1)
